@@ -3,13 +3,11 @@ import API from "../utils/API";
 import { Col, Row, Container } from "../components/Grid";
 import { Input, TextArea, FormBtn } from "../components/Form";
 
-class Signup extends Component {
+class Login extends Component {
   state = {
     email: "",
     password: ""
-
   };
-
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
@@ -18,17 +16,20 @@ class Signup extends Component {
   };
 
   handleFormSubmit = event => {
-
     event.preventDefault();
-    if (this.state.email && this.state.password) {
-      API.saveUser({
-        email: this.state.email,
-        password: this.state.password
-      })
-        .then(console.log("User Created"))
-        .catch(err => console.log(err));
+
+
+    if (!this.state.email || !this.state.password) {
+      return;
     }
+    API.loginUser(this.state.email, this.state.password);
+    this.setState({
+      email: "",
+      password: "",
+    })
   };
+
+
 
   render() {
     return (
@@ -50,15 +51,15 @@ class Signup extends Component {
                 type="password"
               />
               <FormBtn onClick={this.handleFormSubmit}>
-                Sign Up
+                Login
               </FormBtn>
             </form>
           </Col>
         </Row>
-
       </Container>
-    );
+
+    )
   }
 };
 
-export default Signup;
+export default Login;
