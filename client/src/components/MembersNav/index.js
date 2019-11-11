@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Nav() {
+function MembersNav() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <Link className="navbar-brand" to="/">
@@ -19,13 +19,23 @@ function Nav() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/signup" className="nav-link">
-              Sign Up
+            <Link to="/dashboard" className={window.location.pathname === "/dashboard" ? "nav-link active" : "nav-link"}>
+              Dashboard
              </Link>
           </li>
           <li className="nav-item">
-            <Link to="/login" className="nav-link">
-              Login
+            <Link to="/add-bill" className="nav-link">
+              Add Bill
+             </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/history" className="nav-link">
+              History
+             </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/logout" className="nav-link">
+              Log Out
              </Link>
           </li>
         </ul>
@@ -36,4 +46,4 @@ function Nav() {
   );
 }
 
-export default Nav;
+export default MembersNav;
