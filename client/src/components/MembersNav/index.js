@@ -19,7 +19,7 @@ function MembersNav() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/dashboard" className={window.location.pathname === "__dir/dashboard" ? "nav-link active" : "nav-link"}>
+            <Link to="/dashboard" className={window.location.pathname === "/dashboard" ? "nav-link active" : "nav-link"}>
               Dashboard
              </Link>
           </li>
