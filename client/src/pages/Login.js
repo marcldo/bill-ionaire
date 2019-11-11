@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import API from "../utils/API";
 import { Col, Row, Container } from "../components/Grid";
 import { Input, TextArea, FormBtn } from "../components/Form";
+import Nav from "../components/Nav";
 
 class Login extends Component {
   state = {
@@ -33,31 +34,33 @@ class Login extends Component {
 
   render() {
     return (
-      <Container fluid>
-        <Row>
-          <Col size="md-6">
-            <form>
-              <Input
-                value={this.state.email}
-                onChange={this.handleInputChange}
-                name="email"
-                placeholder="Email (required)"
-              />
-              <Input
-                value={this.state.password}
-                onChange={this.handleInputChange}
-                name="password"
-                placeholder="Password (required)"
-                type="password"
-              />
-              <FormBtn onClick={this.handleFormSubmit}>
-                Login
+      <>
+        <Nav />
+        <Container fluid>
+          <Row>
+            <Col size="md-6">
+              <form>
+                <Input
+                  value={this.state.email}
+                  onChange={this.handleInputChange}
+                  name="email"
+                  placeholder="Email (required)"
+                />
+                <Input
+                  value={this.state.password}
+                  onChange={this.handleInputChange}
+                  name="password"
+                  placeholder="Password (required)"
+                  type="password"
+                />
+                <FormBtn onClick={this.handleFormSubmit}>
+                  Login
               </FormBtn>
-            </form>
-          </Col>
-        </Row>
-      </Container>
-
+              </form>
+            </Col>
+          </Row>
+        </Container>
+      </>
     )
   }
 };
