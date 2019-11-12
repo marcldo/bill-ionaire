@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function MembersNav() {
+function MembersNav(props) {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <Link className="navbar-brand" to="/">
@@ -11,7 +11,7 @@ function MembersNav() {
         <span className="navbar-toggler-icon"></span>
       </button>
 
-      <div className="collapse navbar-collapse" id="navbarSupportedContent">
+      <div className="collapse navbar-collapse w-100 order-3 dual-collapse2" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item">
             <Link to="/" className="nav-link">
@@ -38,9 +38,23 @@ function MembersNav() {
               Log Out
              </Link>
           </li>
+
         </ul>
 
       </div>
+
+      <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+
+          <span class="navbar-text">
+            {props.user}
+          </span>
+
+        </ul>
+
+
+      </div>
+
 
     </nav >
   );
