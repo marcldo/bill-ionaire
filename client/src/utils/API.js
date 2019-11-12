@@ -16,5 +16,8 @@ export default {
 			.catch(function (err) {
 				console.log(err);
 			});
+	},
+	getUser: function () {
+		return axios.get("/api/user_data")
 	}
 }
