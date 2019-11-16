@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "root",
-    "password": "password",
-    "database": "billionaire",
+    "password": "dance",
+    "database": "animals_db",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
