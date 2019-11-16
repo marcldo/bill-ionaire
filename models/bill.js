@@ -16,7 +16,7 @@ module.exports = function (sequelize, DataTypes) {
   });
 
   Bill.associate = function (models) {
-    models.Bill.belongsTo(models.User, {
+    models.Bill.belongsTo(models.RecurBill, {
       foreignKey: {
         allowNull: false
       }
