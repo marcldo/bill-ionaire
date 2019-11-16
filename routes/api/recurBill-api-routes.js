@@ -40,8 +40,25 @@ router.post("/api/recurbills/:id", function (req, res) {
 // DELETE route for deleting recurring bills
 router.delete("/api/recurbills/:id", function (req, res) {
   db.RecurBills.destroy({
-    //////////
-  })
-})
+    where: {
+      id: req.params.id
+    }
+  }).then(function (dbRecurBill) {
+    res.json(dbRecurBill);
+  });
+});
 
 //PUT route for updating recurring 
+router.put("/api/posts", function (req, res) {
+  db.RecurBills.update(
+    req.body,
+    {
+      where: {
+        id: req.body.id
+      }
+    }).then(function (dbRecurBill) {
+      res.json(dbRecurBill);
+    });
+});
+
+module.exports = router;
