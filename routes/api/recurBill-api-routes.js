@@ -4,12 +4,12 @@ const router = express.Router();
 const db = require("../../models")
 
 // GET route for getting all of the bills
-router.get("/api/posts", function (req, res) {
+router.get("/api/recurbills", function (req, res) {
   var query = {};
   if (req.query.UserId) {
     query.UserId = req.query.UserId;
   }
-  db.RecurBills.findAll({
+  db.RecurBill.findAll({
     where: query
   }).then(function (dbRecurBill) {
     res.json(dbRecurBill);
@@ -18,7 +18,7 @@ router.get("/api/posts", function (req, res) {
 
 //GET route for retrieving a single recurring bill
 router.get("/api/recurbills/:id", function (req, res) {
-  db.RecurBills.findOne({
+  db.RecurBill.findOne({
     where: {
       id: req.params.id
     }
@@ -30,16 +30,18 @@ router.get("/api/recurbills/:id", function (req, res) {
 
 
 //POST route for saving a new recurring bill
-router.post("/api/recurbills/:id", function (req, res) {
-  db.RecurBills.create(req.body)
+router.post("/api/recurbills", function (req, res) {
+  console.log("route hit")
+  db.RecurBill.create(req.body)
     .then(function (dbRecurBill) {
       res.json(dbRecurBill);
-    });
+    })
+    .catch(err => console.log(err));
 });
 
 // DELETE route for deleting recurring bills
 router.delete("/api/recurbills/:id", function (req, res) {
-  db.RecurBills.destroy({
+  db.RecurBill.destroy({
     where: {
       id: req.params.id
     }
@@ -50,7 +52,7 @@ router.delete("/api/recurbills/:id", function (req, res) {
 
 //PUT route for updating recurring 
 router.put("/api/posts", function (req, res) {
-  db.RecurBills.update(
+  db.RecurBill.update(
     req.body,
     {
       where: {

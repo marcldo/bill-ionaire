@@ -27,6 +27,7 @@ app.use(passport.session());
 
 // Requiring our API routes
 app.use(require("./routes"));
+app.use(require("./routes/api/recurBill-api-routes"));
 
 // Send every request to the React app
 // Define any API routes before this runs
