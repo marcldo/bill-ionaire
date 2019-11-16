@@ -4,6 +4,12 @@ const session = require("express-session");
 // Requiring passport as we've configured it
 const path = require("path");
 const passport = require("./config/passport");
+// node scheduler
+const schedule = require("node-schedule");
+
+//moment recur 
+const moment = require('moment');
+console.log(require('moment-recur'));
 
 // Setting up port and requiring models for syncing
 const PORT = process.env.PORT || 5050;
@@ -35,9 +41,67 @@ app.get("*", function(req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
+
+
+function createNextBills() {
+  db.RecurBill.findAll({})
+    .then((dbRecurBills) => {
+      for (let recurBill of dbRecurBills) {
+
+        const startDate = recurBill.startDate;
+
+        // weekly, biweekly, monthly, quarterly, semi-annual, annual
+        let recurrence = moment(startDate).recur();
+
+        switch (recurBill.frequency) {
+          case "weekly":
+            recurrence = recurrence.every(1).weeks();
+            break;
+          case "bi-weekly":
+            recurrence = recurrence.every(2).weeks();
+            break;
+          case "quarterly":
+            recurrence = recurrence.every(3).months();
+            break;
+          case "semi-annually":
+            recurrence = recurrence.every(6).months();
+            break;
+          case "annually":
+            recurrence = recurrence.every(1).year();
+            break;
+          case "monthly":
+          default:
+            recurrence = recurrence.every(1).month();
+            break;
+        }
+
+        recurrence.fromDate(moment().format("YYYY-MM-DD"));
+
+
+        // Outputs: ["02/06/2014", "02/08/2014", "02/10/2014"]
+        let nextDates;
+
+        nextDates = recurrence.next(1, "YYYY-MM-DD");
+
+
+
+        const nextDate = nextDates[0];
+
+
+        db.Bill.findOrCreate({
+          where: { dueDate: nextDate, RecurBillId: recurBill.id },
+          defaults: { amount: recurBill.amount, paid: false }
+        });
+      }
+    });
+}
+
+const j = schedule.scheduleJob("* * * * *", createNextBills);
+
 // Syncing our database and logging a message to the user upon success
-db.sequelize.sync().then(function() {
-  app.listen(PORT, function() {
+db.sequelize.sync().then(function () {
+
+  app.listen(PORT, function () {
     console.log(
       "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
       PORT,
