@@ -81,17 +81,18 @@ function createNextBills() {
         // Outputs: ["02/06/2014", "02/08/2014", "02/10/2014"]
         let nextDates;
 
-        nextDates = recurrence.next(1, "YYYY-MM-DD");
+        nextDates = recurrence.next(4, "YYYY-MM-DD");
+        console.log(nextDates);
 
+        for (let i = 0; i < nextDates.length; i++) {
+          let nextDate = nextDates[i];
 
-
-        const nextDate = nextDates[0];
-
-
-        db.Bill.findOrCreate({
-          where: { dueDate: nextDate, RecurBillId: recurBill.id },
-          defaults: { amount: recurBill.amount, paid: false }
-        });
+          console.log(nextDate)
+          db.Bill.findOrCreate({
+            where: { dueDate: nextDate, RecurBillId: recurBill.id },
+            defaults: { amount: recurBill.amount, paid: false }
+          });
+        }
       }
     });
 }
