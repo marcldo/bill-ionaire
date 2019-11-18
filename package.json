@@ -25,8 +25,14 @@
     "express": "^4.16.3",
     "express-session": "^1.17.0",
     "if-env": "^1.0.4",
+<<<<<<< HEAD
     "jquery": "^3.4.1",
+=======
+    "moment": "^2.24.0",
+    "moment-recur": "1.0.5",
+>>>>>>> 77a7b60e78a741ea2dfbe5003df49022368935e4
     "mysql2": "^2.0.0",
+    "node-schedule": "^1.3.2",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "popper.js": "^1.16.0",
