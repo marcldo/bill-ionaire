@@ -3,19 +3,24 @@ import API from "../utils/API";
 import DeleteBtn from "../components/DeleteBtn";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
-import { Input, TextArea, FormBtn } from "../components/Form";
+import { Input, FormBtn } from "../components/Form";
 
-class Bills extends Component {
+const moment = require("moment");
+
+class AddBills extends Component {
   state = {
-    bills: []
+    bills: [],
+    userId: null
   };
 
   componentDidMount() {
+    this.setState({ userId: this.props.userId });
     this.loadBills();
+    console.log(this.state.userId);
   }
 
   loadBills = () => {
-    API.getBills()
+    API.getRecurBills(this.state.userId)
       .then(res => this.setState({ bills: res.data }))
       .catch(err => console.log(err));
   };
@@ -30,7 +35,7 @@ class Bills extends Component {
             <form>
               <div class="form-group">
                 <label for="exampleFormControlInput1">Bill Name</label>
-                <input
+                <Input
                   type="text"
                   class="form-control"
                   id="exampleFormControlInput1"
@@ -39,7 +44,7 @@ class Bills extends Component {
               </div>
               <div class="form-group">
                 <label for="exampleFormControlInput1">Amount</label>
-                <input
+                <Input
                   type="amount"
                   class="form-control"
                   id="exampleFormControlInput1"
@@ -58,12 +63,15 @@ class Bills extends Component {
               </div>
               <div class="form-group">
                 <label for="exampleFormControlSelect2">Start Date</label>
-                <input
+                <Input
                   type="Date"
                   class="form-control"
                   id="exampleFormControlInput1"
                   placeholder="9.99"
                 />
+              </div>
+              <div>
+                <FormBtn></FormBtn>
               </div>
             </form>
           </Col>
@@ -76,7 +84,8 @@ class Bills extends Component {
                   <ListItem key={bill._id}>
                     <a href={"/bills/" + bill._id}>
                       <strong>
-                        {bill.title} by {bill.author}
+                        {bill.name} {bill.amount} {bill.frequency}{" "}
+                        {bill.startDate}
                       </strong>
                     </a>
                     <DeleteBtn />
@@ -93,4 +102,4 @@ class Bills extends Component {
   }
 }
 
-export default Bills;
+export default AddBills;
