@@ -31,17 +31,17 @@ class History extends React.Component {
                     <th>Bill Company Name:</th>
                     <th>Amount:</th>
                     <th>Due Date:</th>
-                    <th>Paid:</th>
+                    <th>Frequency</th>
                   </tr>
                 </thead>
                 <tbody>
                   {this.state.bills.map(bill => (
                     <tr>
-                      <td>{bill.id}</td>
+                      <td>{bill.Userid}</td>
                       <td>{bill.name}</td>
                       <td>{bill.amount}</td>
-                      <td>{bill.dueDate}</td>
-                      <td>{bill.paid}</td>
+                      <td>{bill.startDate}</td>
+                      <td>{bill.frequency}</td>
                     </tr>
                   ))}
                 </tbody>

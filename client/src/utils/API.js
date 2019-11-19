@@ -33,18 +33,18 @@ export default {
     return Promise.resolve({
       data: [
         {
-          id: 1,
+          UserId: 1,
           name: "visa",
           amount: 100,
-          dueDate: "2019-11-16",
-          paid: "yes"
+          startDate: "2019-11-16",
+          frequency: "monthly"
         },
         {
-          id: 2,
+          UserId: 2,
           name: "visa",
           amount: 50,
-          dueDate: "2019-11-16",
-          paid: "no"
+          startDate: "2019-11-16",
+          frequency: "bi-weekly"
         }
       ]
     });
