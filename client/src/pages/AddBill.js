@@ -9,21 +9,21 @@ const moment = require("moment");
 
 class AddBills extends Component {
   state = {
-    bills: [],
-    userId: null
+    bills: []
   };
-
-  componentDidMount() {
-    this.setState({ userId: this.props.userId });
-    this.loadBills();
-    console.log(this.state.userId);
-  }
-
   loadBills = () => {
-    API.getRecurBills(this.state.userId)
+    console.log("AHAHHAHAs");
+    API.getRecurBills(this.props.userId)
       .then(res => this.setState({ bills: res.data }))
       .catch(err => console.log(err));
   };
+  componentDidMount() {
+    console.log("props: " + this.props.userId);
+
+    this.loadBills();
+    console.log("state: " + this.state.userId);
+  }
+  
 
   render() {
     return (
@@ -71,7 +71,7 @@ class AddBills extends Component {
                 />
               </div>
               <div>
-                <FormBtn></FormBtn>
+                <FormBtn>SUBMIT!</FormBtn>
               </div>
             </form>
           </Col>
