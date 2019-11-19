@@ -3,8 +3,6 @@ import API from "../utils/API";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 
-
-
 class Dashboard extends Component {
   state = {
     dueBills: [],
