@@ -18,6 +18,16 @@ export default {
 			});
 	},
 	getUser: function () {
-		return axios.get("/api/user_data")
+		return axios.get("/api/user_data");
+	},
+
+	getDueBills: function () {
+		return axios.get();
+	},
+	getPaidBills: function () {
+		return axios.get();
+	},
+	getOverdueBills: function () {
+		return axios.get();
 	}
 }

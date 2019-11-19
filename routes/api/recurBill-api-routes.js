@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const db = require("../../models")
+const db = require("../../models");
 
 // GET route for getting all of the bills
 router.get("/api/recurbills", function (req, res) {
@@ -23,7 +23,6 @@ router.get("/api/recurbills/:id", function (req, res) {
       id: req.params.id
     }
   }).then(function (dbRecurBill) {
-    console.log(dbRecurBill);
     res.json(dbRecurBill);
   });
 });
@@ -31,7 +30,6 @@ router.get("/api/recurbills/:id", function (req, res) {
 
 //POST route for saving a new recurring bill
 router.post("/api/recurbills", function (req, res) {
-  console.log("route hit")
   db.RecurBill.create(req.body)
     .then(function (dbRecurBill) {
       res.json(dbRecurBill);
