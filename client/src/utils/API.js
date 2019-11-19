@@ -41,5 +41,7 @@ export default {
         }
       ]
     });
+  getRecurBills: function(userId) {
+    return axios.get(`/api/recurbills/${userId}`);
   }
 };
