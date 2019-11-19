@@ -21,6 +21,13 @@ export default {
   getUser: function() {
     return axios.get("/api/user_data");
   },
+  getRecurBills: function(userId) {
+    return axios.get(`/api/recurbills/${userId}`);
+  },
+
+  getRecurBills: function(userId) {
+    return axios.get(`/api/recurbills/${userId}`);
+  },
 
   getBills: function() {
     return Promise.resolve({
@@ -41,7 +48,5 @@ export default {
         }
       ]
     });
-  getRecurBills: function(userId) {
-    return axios.get(`/api/recurbills/${userId}`);
   }
 };
