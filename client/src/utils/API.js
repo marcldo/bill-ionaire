@@ -21,13 +21,13 @@ export default {
 		return axios.get("/api/user_data");
 	},
 
-	getDueBills: function () {
-		return axios.get();
+	getDueBills: function (id, month) {
+		return axios.get(`/api/bills/unpaid/${id}/${month}`);
 	},
-	getPaidBills: function () {
-		return axios.get();
+	getPaidBills: function (id, month) {
+		return axios.get(`/api/bills/paid/${id}/${month}`);
 	},
-	getOverdueBills: function () {
-		return axios.get();
+	getOverdueBills: function (id) {
+		return axios.get(`/api/bills/overdue/${id}`);
 	}
 }
