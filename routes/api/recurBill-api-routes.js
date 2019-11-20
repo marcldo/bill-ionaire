@@ -16,6 +16,18 @@ router.get("/api/recurbills", function (req, res) {
   });
 });
 
+//GET route for retrieving all recurring bill for one user
+router.get("/api/recurbills/:id", function (req, res) {
+  db.RecurBill.findAll({
+    where: {
+      userId: req.params.id
+    }
+  }).then(function (dbRecurBill) {
+    console.log(dbRecurBill);
+    res.json(dbRecurBill);
+  });
+});
+
 //GET route for retrieving a single recurring bill
 router.get("/api/recurbills/:id", function (req, res) {
   db.RecurBill.findOne({
@@ -26,7 +38,6 @@ router.get("/api/recurbills/:id", function (req, res) {
     res.json(dbRecurBill);
   });
 });
-
 
 //POST route for saving a new recurring bill
 router.post("/api/recurbills", function (req, res) {
@@ -48,17 +59,15 @@ router.delete("/api/recurbills/:id", function (req, res) {
   });
 });
 
-//PUT route for updating recurring 
+//PUT route for updating recurring
 router.put("/api/posts", function (req, res) {
-  db.RecurBill.update(
-    req.body,
-    {
-      where: {
-        id: req.body.id
-      }
-    }).then(function (dbRecurBill) {
-      res.json(dbRecurBill);
-    });
+  db.RecurBill.update(req.body, {
+    where: {
+      id: req.body.id
+    }
+  }).then(function (dbRecurBill) {
+    res.json(dbRecurBill);
+  });
 });
 
 module.exports = router;
