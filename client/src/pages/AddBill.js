@@ -34,16 +34,9 @@ class AddBills extends Component {
   handleFormSubmit = e => {
     e.preventDefault();
     alert(" Thank you! Your bill is submitted! ");
-    //clear state
-    this.setState({
-      name: "",
-      amount: "",
-      frequency: "",
-      startDate: "",
-      UserId:""
-    
-  });
+
     //to do validation
+
     API.postRecurBills({
       name: this.state.name,
       amount: this.state.amount,
@@ -53,6 +46,15 @@ class AddBills extends Component {
     })
       .then(console.log("User Created"))
       .catch(err => console.log(err));
+
+    //clear state
+    this.setState({
+      name: null,
+      amount: null,
+      frequency: null,
+      startDate: null,
+      UserId: null
+    });
   };
 
   render() {
