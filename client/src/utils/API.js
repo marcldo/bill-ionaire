@@ -29,6 +29,10 @@ export default {
     alert("posted");
     return axios.post("/api/recurbills/create", recurBills);
   },
+  deleteRecurBill: function(id) {
+    return axios.delete(`/api/recurbills/${id}`);
+  },
+
   getDueBills: function(id, month) {
     return axios.get(`/api/bills/unpaid/${id}/${month}`);
   },
