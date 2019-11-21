@@ -22,6 +22,11 @@ export default {
     return axios.get("/api/user_data");
   },
   getRecurBills: function(userId) {
+    console.log(userId);
     return axios.get(`/api/recurbills/${userId}`);
+  },
+  postRecurBills: function(recurBills) {
+    alert("posted");
+    return axios.post("/api/recurbills/create", recurBills);
   }
 };
