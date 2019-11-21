@@ -9,7 +9,7 @@ const schedule = require("node-schedule");
 
 //moment recur
 const moment = require("moment");
-console.log(require("moment-recur"));
+require("moment-recur");
 
 // Setting up port and requiring models for syncing
 const PORT = process.env.PORT || 5050;
@@ -76,12 +76,10 @@ function createNextBills() {
       let nextDates;
 
       nextDates = recurrence.next(4, "YYYY-MM-DD");
-      console.log(nextDates);
 
       for (let i = 0; i < nextDates.length; i++) {
         let nextDate = nextDates[i];
 
-        console.log(nextDate);
         db.Bill.findOrCreate({
           where: { dueDate: nextDate, RecurBillId: recurBill.id },
           defaults: { amount: recurBill.amount, paid: false }
@@ -91,7 +89,7 @@ function createNextBills() {
   });
 }
 
-const j = schedule.scheduleJob("* * * * *", createNextBills);
+// const j = schedule.scheduleJob("* * * * *", createNextBills);
 
 // Syncing our database and logging a message to the user upon success
 db.sequelize.sync().then(function() {

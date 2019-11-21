@@ -28,5 +28,14 @@ export default {
   postRecurBills: function(recurBills) {
     alert("posted");
     return axios.post("/api/recurbills/create", recurBills);
+  },
+  getDueBills: function(id, month) {
+    return axios.get(`/api/bills/unpaid/${id}/${month}`);
+  },
+  getPaidBills: function(id, month) {
+    return axios.get(`/api/bills/paid/${id}/${month}`);
+  },
+  getOverdueBills: function(id) {
+    return axios.get(`/api/bills/overdue/${id}`);
   }
 };
