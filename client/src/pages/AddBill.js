@@ -5,14 +5,16 @@ import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, FormBtn } from "../components/Form";
 
-const moment = require("moment");
-
 class AddBills extends Component {
   state = {
-    bills: []
+    bills: [],
+    name: null,
+    amount: null,
+    frequency: null,
+    startDate: null
   };
+
   loadBills = () => {
-    console.log("AHAHHAHAs");
     API.getRecurBills(this.props.userId)
       .then(res => this.setState({ bills: res.data }))
       .catch(err => console.log(err));
@@ -23,7 +25,42 @@ class AddBills extends Component {
     this.loadBills();
     console.log("state: " + this.state.userId);
   }
-  
+  handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  };
+  handleFormSubmit = e => {
+    e.preventDefault();
+    alert(" Thank you! Your bill is submitted! ");
+
+    //to do validation
+
+    API.postRecurBills({
+      name: this.state.name,
+      amount: this.state.amount,
+      frequency: this.state.frequency,
+      startDate: this.state.startDate,
+      UserId: this.props.userId
+    })
+      .then(console.log("User Created"))
+      .catch(err => console.log(err));
+
+    //clear state
+    this.setState({
+      name: null,
+      amount: null,
+      frequency: null,
+      startDate: null,
+      UserId: null
+    });
+  };
+  deleteRecurBill = id => {
+    API.deleteRecurBill(id)
+      .then(res => this.loadBills())
+      .catch(err => console.log(err));
+  };
 
   render() {
     return (
@@ -33,27 +70,39 @@ class AddBills extends Component {
             <h1>Bills</h1>
 
             <form>
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleFormControlInput1">Bill Name</label>
                 <Input
+                  value={this.state.name}
+                  onChange={this.handleInputChange}
+                  name="name"
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   id="exampleFormControlInput1"
                   placeholder="Netflix"
                 />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleFormControlInput1">Amount</label>
                 <Input
+                  value={this.state.amount}
+                  onChange={this.handleInputChange}
+                  name="amount"
                   type="amount"
-                  class="form-control"
+                  className="form-control"
                   id="exampleFormControlInput1"
                   placeholder="9.99"
                 />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleFormControlSelect1">Frequency</label>
-                <select class="form-control" id="exampleFormControlSelect1">
+                <select
+                  className="form-control"
+                  id="exampleFormControlSelect1"
+                  value={this.state.frequency}
+                  onChange={this.handleInputChange}
+                  name="frequency"
+                >
                   <option>bi-weekly</option>
                   <option>quarterly</option>
                   <option>semi-annually</option>
@@ -61,17 +110,19 @@ class AddBills extends Component {
                   <option>monthly</option>
                 </select>
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <label for="exampleFormControlSelect2">Start Date</label>
                 <Input
-                  type="Date"
-                  class="form-control"
+                  value={this.state.startDate}
+                  onChange={this.handleInputChange}
+                  name="startDate"
+                  type="date"
+                  className="form-control"
                   id="exampleFormControlInput1"
-                  placeholder="9.99"
                 />
               </div>
-              <div>
-                <FormBtn>SUBMIT!</FormBtn>
+              <div className="text-center">
+                <FormBtn onClick={this.handleFormSubmit}>SUBMIT!</FormBtn>
               </div>
             </form>
           </Col>
@@ -81,14 +132,13 @@ class AddBills extends Component {
             {this.state.bills.length ? (
               <List>
                 {this.state.bills.map(bill => (
-                  <ListItem key={bill._id}>
-                    <a href={"/bills/" + bill._id}>
-                      <strong>
-                        {bill.name} {bill.amount} {bill.frequency}{" "}
-                        {bill.startDate}
-                      </strong>
-                    </a>
-                    <DeleteBtn />
+                  <ListItem key={bill.id}>
+                    <strong>
+                      {bill.name} {bill.amount} {bill.frequency}{" "}
+                      {bill.startDate}
+                    </strong>
+
+                    <DeleteBtn onClick={() => this.deleteRecurBill(bill.id)} />
                   </ListItem>
                 ))}
               </List>
