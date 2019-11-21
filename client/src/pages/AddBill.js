@@ -56,6 +56,11 @@ class AddBills extends Component {
       UserId: null
     });
   };
+  deleteRecurBill = id => {
+    API.deleteRecurBill(id)
+      .then(res => this.loadBills())
+      .catch(err => console.log(err));
+  };
 
   render() {
     return (
@@ -127,14 +132,13 @@ class AddBills extends Component {
             {this.state.bills.length ? (
               <List>
                 {this.state.bills.map(bill => (
-                  <ListItem key={bill._id}>
-                    <a href={"/bills/" + bill._id}>
-                      <strong>
-                        {bill.name} {bill.amount} {bill.frequency}{" "}
-                        {bill.startDate}
-                      </strong>
-                    </a>
-                    <DeleteBtn />
+                  <ListItem key={bill.id}>
+                    <strong>
+                      {bill.name} {bill.amount} {bill.frequency}{" "}
+                      {bill.startDate}
+                    </strong>
+
+                    <DeleteBtn onClick={() => this.deleteRecurBill(bill.id)} />
                   </ListItem>
                 ))}
               </List>
