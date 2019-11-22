@@ -12,7 +12,7 @@ class History extends React.Component {
   }
 
   loadBills = () => {
-    API.getBills()
+    API.getHistory(this.props.userId)
       .then(res => this.setState({ bills: res.data }))
       .catch(err => console.log(err));
   };
@@ -30,7 +30,7 @@ class History extends React.Component {
                     <th></th>
                     <th>Bill Company Name:</th>
                     <th>Amount:</th>
-                    <th>Due Date:</th>
+                    <th>Paid Date:</th>
                     <th>Frequency</th>
                   </tr>
                 </thead>
@@ -38,10 +38,10 @@ class History extends React.Component {
                   {this.state.bills.map(bill => (
                     <tr>
                       <td>{bill.Userid}</td>
-                      <td>{bill.name}</td>
+                      <td>{bill.RecurBill.name}</td>
                       <td>{bill.amount}</td>
-                      <td>{bill.startDate}</td>
-                      <td>{bill.frequency}</td>
+                      <td>{bill.updatedAt.substring(0, 10)}</td>
+                      <td>{bill.RecurBill.frequency}</td>
                     </tr>
                   ))}
                 </tbody>
