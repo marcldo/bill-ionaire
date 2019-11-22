@@ -19,7 +19,9 @@ module.exports = function (sequelize, DataTypes) {
     models.Bill.belongsTo(models.RecurBill, {
       foreignKey: {
         allowNull: false
-      }
+      },
+      // onDelete: "cascade"
+
     });
   };
   return Bill;

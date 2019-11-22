@@ -1,45 +1,49 @@
 import axios from "axios";
 
 export default {
-  saveUser: function(userData) {
+  saveUser: function (userData) {
     return axios.post("/api/signup", userData);
   },
-  loginUser: function(email, password) {
+  loginUser: function (email, password) {
     return axios
       .post("/api/login", {
         email,
         password
       })
-      .then(function() {
+      .then(function () {
         console.log("logged in");
         window.location.replace("/members");
       })
-      .catch(function(err) {
+      .catch(function (err) {
         console.log(err);
       });
   },
-  getUser: function() {
+  getUser: function () {
     return axios.get("/api/user_data");
   },
-  getRecurBills: function(userId) {
+  getRecurBills: function (userId) {
     console.log(userId);
     return axios.get(`/api/recurbills/${userId}`);
   },
-  postRecurBills: function(recurBills) {
+  postRecurBills: function (recurBills) {
     alert("posted");
     return axios.post("/api/recurbills/create", recurBills);
   },
-  deleteRecurBill: function(id) {
+  deleteRecurBill: function (id) {
     return axios.delete(`/api/recurbills/${id}`);
   },
 
-  getDueBills: function(id, month) {
+  getDueBills: function (id, month) {
     return axios.get(`/api/bills/unpaid/${id}/${month}`);
   },
-  getPaidBills: function(id, month) {
+  getPaidBills: function (id, month) {
     return axios.get(`/api/bills/paid/${id}/${month}`);
   },
-  getOverdueBills: function(id) {
+  getOverdueBills: function (id) {
     return axios.get(`/api/bills/overdue/${id}`);
+  },
+  updateBills: function (id, billData) {
+    console.log("axios", id, billData);
+    return axios.put(`/api/bills/${id}`, billData);
   }
 };
