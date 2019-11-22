@@ -1,6 +1,5 @@
-import React from 'react'
+import React from "react";
 import Nav from "../components/Nav";
-
 
 class Home extends React.Component {
   render() {
@@ -9,7 +8,7 @@ class Home extends React.Component {
         <Nav />
         <h1>Home</h1>
       </div>
-    )
+    );
   }
 }
-export default Home
+export default Home;

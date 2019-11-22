@@ -36,7 +36,7 @@ class Members extends Component {
           <div>
             <Route exact path="/dashboard" component={() => <Dashboard userId={this.state.userId} />} />
             <Route exact path="/add-bill" component={() => <AddBill userId={this.state.userId} />} />
-            <Route exact path="/history" component={History} />
+            <Route exact path="/history" component={() => <History userId={this.state.userId} />} />
           </div>
         </Router>
       </>
