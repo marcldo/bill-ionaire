@@ -4,11 +4,12 @@ import DeleteBtn from "../components/DeleteBtn";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, FormBtn } from "../components/Form";
+import { number } from "prop-types";
 
 class AddBills extends Component {
   state = {
     bills: [],
-    name: null,
+    name: "",
     amount: null,
     frequency: null,
     startDate: null
@@ -25,6 +26,15 @@ class AddBills extends Component {
     this.loadBills();
     console.log("state: " + this.state.userId);
   }
+  handleAmountValidation = event => {
+    //form validation
+    let validAmount = /^[0-9]+\.?[0-9]*$/;
+    const { name, value } = event.target;
+    console.log(this.state.amount);
+
+    validAmount.test(value) ? console.log("valid") : console.log("invalid");
+    this.handleInputChange(event);
+  };
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
@@ -38,28 +48,24 @@ class AddBills extends Component {
   };
   handleFormSubmit = e => {
     e.preventDefault();
-    //form validation
-    if (this.state.name && this.state.amount) {
-      alert(" Thank you! Your bill is submitted! ");
-      API.postRecurBills({
-        name: this.state.name,
-        amount: this.state.amount,
-        frequency: this.state.frequency,
-        startDate: this.state.startDate,
-        UserId: this.props.userId
-      })
-        .then(console.log("User Created"))
-        .catch(err => console.log(err));
+    API.postRecurBills({
+      name: this.state.name,
+      amount: this.state.amount,
+      frequency: this.state.frequency,
+      startDate: this.state.startDate,
+      UserId: this.props.userId
+    })
+      .then(console.log("User Created"))
+      .catch(err => console.log(err));
 
-      //clear state
-      this.setState({
-        name: null,
-        amount: null,
-        frequency: null,
-        startDate: null,
-        UserId: null
-      });
-    }
+    // clear state
+    this.setState({
+      name: null,
+      amount: null,
+      frequency: null,
+      startDate: null,
+      UserId: null
+    });
   };
 
   render() {
@@ -86,9 +92,9 @@ class AddBills extends Component {
                   <label for="exampleFormControlInput1">Amount</label>
                   <Input
                     value={this.state.amount}
-                    onChange={this.handleInputChange}
+                    onChange={this.handleAmountValidation}
                     name="amount"
-                    type="amount"
+                    type="number"
                     className="form-control"
                     id="exampleFormControlInput1"
                     placeholder="9.99"
