@@ -33,11 +33,11 @@ export default {
     return axios.delete(`/api/recurbills/${id}`);
   },
 
-  getDueBills: function (id, month) {
-    return axios.get(`/api/bills/unpaid/${id}/${month}`);
+  getDueBills: function (id, month, year) {
+    return axios.get(`/api/bills/unpaid/${id}/${month}/${year}`);
   },
-  getPaidBills: function (id, month) {
-    return axios.get(`/api/bills/paid/${id}/${month}`);
+  getPaidBills: function (id, month, year) {
+    return axios.get(`/api/bills/paid/${id}/${month}/${year}`);
   },
   getOverdueBills: function (id) {
     return axios.get(`/api/bills/overdue/${id}`);

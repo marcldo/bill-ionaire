@@ -5,12 +5,12 @@ const Op = sequelize.Op
 const db = require("../../models");
 
 //get all unpaid bills for the month and logged in user
-router.get("/unpaid/:id/:month", function (req, res) {
-  const year = (new Date()).getFullYear();
+router.get("/unpaid/:id/:month/:year", function (req, res) {
+
   db.Bill.findAll({
     where:
       [sequelize.where(sequelize.fn("MONTH", sequelize.col('dueDate')), req.params.month),
-      sequelize.where(sequelize.fn("YEAR", sequelize.col('dueDate')), year),
+      sequelize.where(sequelize.fn("YEAR", sequelize.col('dueDate')), req.params.year),
       { paid: false }],
     include: [{
       model: db.RecurBill,
@@ -19,18 +19,19 @@ router.get("/unpaid/:id/:month", function (req, res) {
       }
     }]
   })
-    .then(function (dbBill) {
-      res.json(dbBill);
+    .then(function (unpaidBills) {
+
+      res.json(unpaidBills.map(bill => bill.toJSON()));
     })
 });
 
 //get all paid bills for the month and logged in user
-router.get("/paid/:id/:month", function (req, res) {
-  const year = (new Date()).getFullYear();
+router.get("/paid/:id/:month/:year", function (req, res) {
+
   db.Bill.findAll({
     where:
       [sequelize.where(sequelize.fn("MONTH", sequelize.col('dueDate')), req.params.month),
-      sequelize.where(sequelize.fn("YEAR", sequelize.col('dueDate')), year),
+      sequelize.where(sequelize.fn("YEAR", sequelize.col('dueDate')), req.params.year),
       { paid: true }],
     include: [{
       model: db.RecurBill,
