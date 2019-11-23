@@ -31,125 +31,125 @@ class AddBills extends Component {
       [name]: value
     });
   };
-  handleFormSubmit = e => {
-    e.preventDefault();
-    alert(" Thank you! Your bill is submitted! ");
-
-    //to do validation
-
-    API.postRecurBills({
-      name: this.state.name,
-      amount: this.state.amount,
-      frequency: this.state.frequency,
-      startDate: this.state.startDate,
-      UserId: this.props.userId
-    })
-      .then(console.log("User Created"))
-      .catch(err => console.log(err));
-
-    //clear state
-    this.setState({
-      name: null,
-      amount: null,
-      frequency: null,
-      startDate: null,
-      UserId: null
-    });
-  };
   deleteRecurBill = id => {
     API.deleteRecurBill(id)
       .then(res => this.loadBills())
       .catch(err => console.log(err));
   };
+  handleFormSubmit = e => {
+    e.preventDefault();
+    //form validation
+    if (this.state.name && this.state.amount) {
+      alert(" Thank you! Your bill is submitted! ");
+      API.postRecurBills({
+        name: this.state.name,
+        amount: this.state.amount,
+        frequency: this.state.frequency,
+        startDate: this.state.startDate,
+        UserId: this.props.userId
+      })
+        .then(console.log("User Created"))
+        .catch(err => console.log(err));
+
+      //clear state
+      this.setState({
+        name: null,
+        amount: null,
+        frequency: null,
+        startDate: null,
+        UserId: null
+      });
+    }
+  };
 
   render() {
     return (
-      <Container fluid>
-        <Row>
-          <Col size="md-6">
-            <h1>Bills</h1>
-
-            <form>
-              <div className="form-group">
-                <label for="exampleFormControlInput1">Bill Name</label>
-                <Input
-                  value={this.state.name}
-                  onChange={this.handleInputChange}
-                  name="name"
-                  type="text"
-                  className="form-control"
-                  id="exampleFormControlInput1"
-                  placeholder="Netflix"
-                />
-              </div>
-              <div className="form-group">
-                <label for="exampleFormControlInput1">Amount</label>
-                <Input
-                  value={this.state.amount}
-                  onChange={this.handleInputChange}
-                  name="amount"
-                  type="amount"
-                  className="form-control"
-                  id="exampleFormControlInput1"
-                  placeholder="9.99"
-                />
-              </div>
-              <div className="form-group">
-                <label for="exampleFormControlSelect1">Frequency</label>
-                <select
-                  className="form-control"
-                  id="exampleFormControlSelect1"
-                  value={this.state.frequency}
-                  onChange={this.handleInputChange}
-                  name="frequency"
-                >
-                  <option>bi-weekly</option>
-                  <option>quarterly</option>
-                  <option>semi-annually</option>
-                  <option>annually</option>
-                  <option>monthly</option>
-                </select>
-              </div>
-              <div className="form-group">
-                <label for="exampleFormControlSelect2">Start Date</label>
-                <Input
-                  value={this.state.startDate}
-                  onChange={this.handleInputChange}
-                  name="startDate"
-                  type="date"
-                  className="form-control"
-                  id="exampleFormControlInput1"
-                />
-              </div>
-              <div className="text-center">
-                <FormBtn onClick={this.handleFormSubmit}>SUBMIT!</FormBtn>
-              </div>
-            </form>
-          </Col>
-          <Col size="md-6 sm-12">
-            <h1>My Bills</h1>
-
-            {this.state.bills.length ? (
-              <List>
-                {this.state.bills.map(bill => (
-                  <ListItem key={bill.id}>
-                    <strong>
-                      {bill.name} {bill.amount} {bill.frequency}{" "}
-                      {bill.startDate}
-                    </strong>
-
-                    <DeleteBtn onClick={() => this.deleteRecurBill(bill.id)} />
-                  </ListItem>
-                ))}
-              </List>
-            ) : (
-              <h3>No Results to Display</h3>
-            )}
-          </Col>
-        </Row>
-      </Container>
+      <>
+        <Container fluid>
+          <Row>
+            <Col size="md-6">
+              <h1>Bills</h1>
+              <form>
+                <div className="form-group">
+                  <label for="exampleFormControlInput1">Bill Name</label>
+                  <Input
+                    value={this.state.name}
+                    onChange={this.handleInputChange}
+                    name="name"
+                    type="text"
+                    className="form-control"
+                    id="exampleFormControlInput1"
+                    placeholder="Netflix"
+                  />
+                </div>
+                <div className="form-group">
+                  <label for="exampleFormControlInput1">Amount</label>
+                  <Input
+                    value={this.state.amount}
+                    onChange={this.handleInputChange}
+                    name="amount"
+                    type="amount"
+                    className="form-control"
+                    id="exampleFormControlInput1"
+                    placeholder="9.99"
+                  />
+                </div>
+                <div className="form-group">
+                  <label for="exampleFormControlSelect1">Frequency</label>
+                  <select
+                    className="form-control"
+                    id="exampleFormControlSelect1"
+                    value={this.state.frequency}
+                    onChange={this.handleInputChange}
+                    name="frequency"
+                  >
+                    <option>bi-weekly</option>
+                    <option>quarterly</option>
+                    <option>semi-annually</option>
+                    <option>annually</option>
+                    <option>monthly</option>
+                  </select>
+                </div>
+                <div className="form-group">
+                  <label for="exampleFormControlSelect2">Start Date</label>
+                  <Input
+                    value={this.state.startDate}
+                    onChange={this.handleInputChange}
+                    name="startDate"
+                    type="date"
+                    className="form-control"
+                    id="exampleFormControlInput1"
+                  />
+                </div>
+                <div className="text-center">
+                  <FormBtn onClick={this.handleFormSubmit}>SUBMIT!</FormBtn>
+                </div>
+              </form>
+            </Col>
+            <Col size="md-6 sm-12">
+              <h1>My Bills</h1>
+              {this.state.bills.length ? (
+                <List>
+                  {this.state.bills.map(bill => (
+                    <ListItem key={bill.id}>
+                      <strong>
+                        {bill.name} {bill.amount} {bill.frequency}{" "}
+                        {bill.startDate}
+                      </strong>
+                      <DeleteBtn
+                        onClick={() => this.deleteRecurBill(bill.id)}
+                      />
+                    </ListItem>
+                  ))}
+                </List>
+              ) : (
+                <h3>No Results to Display</h3>
+              )}
+            </Col>
+          </Row>
+        </Container>
+      </>
     );
   }
 }
-
 export default AddBills;
