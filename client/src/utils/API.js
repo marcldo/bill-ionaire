@@ -45,5 +45,8 @@ export default {
   updateBills: function (id, billData) {
     console.log("axios", id, billData);
     return axios.put(`/api/bills/${id}`, billData);
+  },
+  getHistory: function (id) {
+    return axios.get(`/api/bills/history/${id}`);
   }
 };

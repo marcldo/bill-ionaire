@@ -9,6 +9,7 @@ class Login extends Component {
     email: "",
     password: ""
   };
+
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
@@ -19,18 +20,15 @@ class Login extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
 
-
     if (!this.state.email || !this.state.password) {
       return;
     }
     API.loginUser(this.state.email, this.state.password);
     this.setState({
       email: "",
-      password: "",
-    })
+      password: ""
+    });
   };
-
-
 
   render() {
     return (
@@ -53,16 +51,14 @@ class Login extends Component {
                   placeholder="Password (required)"
                   type="password"
                 />
-                <FormBtn onClick={this.handleFormSubmit}>
-                  Login
-              </FormBtn>
+                <FormBtn onClick={this.handleFormSubmit}>Login</FormBtn>
               </form>
             </Col>
           </Row>
         </Container>
       </>
-    )
+    );
   }
-};
+}
 
 export default Login;

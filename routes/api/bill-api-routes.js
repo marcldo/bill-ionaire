@@ -79,4 +79,25 @@ router.put("/:id", function (req, res) {
 });
 
 
+
+router.get("/history/:id", function (req, res) {
+  db.Bill.findAll({
+    where:
+      [{
+        dueDate: {
+          [Op.lt]: new Date()
+        }
+      },
+      { paid: true }],
+    include: [{
+      model: db.RecurBill,
+      where: {
+        UserId: req.params.id
+      }
+    }]
+  })
+    .then(function (dbBill) {
+      res.json(dbBill);
+    })
+});
 module.exports = router;

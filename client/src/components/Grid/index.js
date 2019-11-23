@@ -26,3 +26,11 @@ export function Col({ size, children }) {
         </div>
     );
 }
+
+export function Table({ children, responsive }) {
+    const table = <table className="table">{children}</table>;
+    if (responsive) {
+        return <div className="table-responsive">{table}</div>;
+    }
+    return table;
+}
