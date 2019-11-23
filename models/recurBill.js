@@ -30,7 +30,8 @@ module.exports = function (sequelize, DataTypes) {
       }
     });
     models.RecurBill.hasMany(models.Bill, {
-      onDelete: "cascade"
+      onDelete: "cascade",
+      hooks: true
     });
   };
   return RecurBill;

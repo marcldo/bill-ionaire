@@ -67,6 +67,18 @@ router.get("/overdue/:id", function (req, res) {
     })
 });
 
+router.put("/:id", function (req, res) {
+  console.log()
+  db.Bill.update(req.body, {
+    where: {
+      id: req.params.id
+    }
+  }).then(function (dbBill) {
+    res.json(dbBill);
+  });
+});
+
+
 
 router.get("/history/:id", function (req, res) {
   db.Bill.findAll({
