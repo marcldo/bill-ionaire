@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Input, FormBtn } from "../Form"
 import API from "../../utils/API";
+import "./component.css";
 
 
 
@@ -39,7 +40,7 @@ class Bill extends Component {
 
   render() {
     return (
-      <div className="card" >
+      <div className="card bill" >
         <div className="card-header">
           {this.props.name}
         </div>

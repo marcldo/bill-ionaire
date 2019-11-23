@@ -6,7 +6,6 @@ import Bill from "../components/Bill";
 
 class Dashboard extends Component {
 
-
   state = {
     dueBills: [],
     paidBills: [],
@@ -19,7 +18,7 @@ class Dashboard extends Component {
     this.getCurrentTime();
   };
 
-  
+
   getCurrentTime() {
     const current = new Date()
     const currentYear = current.getFullYear()
@@ -70,11 +69,11 @@ class Dashboard extends Component {
   }
 
   loadBills = (month) => {
-    API.getDueBills(this.props.userId, month)
+    API.getDueBills(this.props.userId, 11)
       .then(res => this.setState({ dueBills: res.data }))
       .catch(err => console.log(err));
 
-    API.getPaidBills(this.props.userId, month)
+    API.getPaidBills(this.props.userId, 11)
       .then(res => this.setState({ paidBills: res.data }))
       .catch(err => console.log(err));
 
@@ -88,7 +87,9 @@ class Dashboard extends Component {
       <Container fluid>
         <Row>
           <Col size="md-4 sm-12">
-            <label for="monthSelect">Month</label>
+
+
+            {/* <label for="monthSelect">Month</label>
             <select
               className="form-control"
               id="monthSelect"
@@ -108,7 +109,9 @@ class Dashboard extends Component {
               <option>October</option>
               <option>November</option>
               <option>December</option>
-            </select>
+            </select> */}
+
+
             <h3>Due</h3>
             {this.state.dueBills.length ? (
               <List>
