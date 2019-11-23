@@ -17,8 +17,6 @@ class Dashboard extends Component {
     };
   }
 
-
-
   componentWillMount() {
     this.loadBills();
   };
