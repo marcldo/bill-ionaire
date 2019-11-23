@@ -20,6 +20,10 @@ module.exports = function (sequelize, DataTypes) {
     startDate: {
       type: DataTypes.DATEONLY,
       allowNull: false,
+    },
+    isActive: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
     }
   });
 

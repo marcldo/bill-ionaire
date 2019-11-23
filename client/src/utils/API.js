@@ -29,15 +29,16 @@ export default {
     alert("posted");
     return axios.post("/api/recurbills/create", recurBills);
   },
-  deleteRecurBill: function (id) {
-    return axios.delete(`/api/recurbills/${id}`);
+  deleteRecurBill: function (id, recurBills) {
+    console.log("axios id " + id, recurBills)
+    return axios.put(`/api/recurbills/${id}`, recurBills);
   },
 
-  getDueBills: function (id, month) {
-    return axios.get(`/api/bills/unpaid/${id}/${month}`);
+  getDueBills: function (id, month, year) {
+    return axios.get(`/api/bills/unpaid/${id}/${month}/${year}`);
   },
-  getPaidBills: function (id, month) {
-    return axios.get(`/api/bills/paid/${id}/${month}`);
+  getPaidBills: function (id, month, year) {
+    return axios.get(`/api/bills/paid/${id}/${month}/${year}`);
   },
   getOverdueBills: function (id) {
     return axios.get(`/api/bills/overdue/${id}`);
