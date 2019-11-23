@@ -9,13 +9,6 @@ export default {
       .post("/api/login", {
         email,
         password
-      })
-      .then(function () {
-        console.log("logged in");
-        window.location.replace("/members");
-      })
-      .catch(function (err) {
-        console.log(err);
       });
   },
   getUser: function () {
