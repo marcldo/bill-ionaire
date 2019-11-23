@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 function MembersNav(props) {
   return (
@@ -19,17 +19,17 @@ function MembersNav(props) {
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/dashboard" className={window.location.pathname === "/dashboard" ? "nav-link active" : "nav-link"}>
+            <Link to="/members/dashboard" className={props.location.pathname === "/members/dashboard" ? "nav-link active" : "nav-link"}>
               Dashboard
              </Link>
           </li>
           <li className="nav-item">
-            <Link to="/add-bill" className="nav-link">
+            <Link to="/members/add-bill" className="nav-link">
               Add Bill
              </Link>
           </li>
           <li className="nav-item">
-            <Link to="/history" className="nav-link">
+            <Link to="/members/history" className="nav-link">
               History
              </Link>
           </li>
@@ -43,10 +43,10 @@ function MembersNav(props) {
 
       </div>
 
-      <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-        <ul class="navbar-nav ml-auto">
+      <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul className="navbar-nav ml-auto">
 
-          <span class="navbar-text">
+          <span className="navbar-text">
             {props.user}
           </span>
 
@@ -60,4 +60,4 @@ function MembersNav(props) {
   );
 }
 
-export default MembersNav;
+export default withRouter(MembersNav);

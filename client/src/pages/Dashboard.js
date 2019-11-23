@@ -75,7 +75,7 @@ class Dashboard extends Component {
       <Container fluid>
         <Row>
           <Col size="md-2 sm-6">
-            <label for="monthSelect">Month</label>
+            <label htmlFor="monthSelect">Month</label>
             <select
               className="form-control"
               id="monthSelect"
@@ -98,7 +98,7 @@ class Dashboard extends Component {
             </select>
           </Col>
           <Col size="md-2 sm-6">
-            <label for="yearSelect">Year</label>
+            <label htmlFor="yearSelect">Year</label>
             <select
               className="form-control"
               id="yearSelect"
@@ -119,7 +119,7 @@ class Dashboard extends Component {
             {this.state.dueBills.length ? (
               <List>
                 {this.state.dueBills.map(dueBill => (
-                  <ListItem>
+                  <ListItem key={dueBill.id}>
                     {/* <strong>
                       Name: {dueBill.RecurBill.name} Amount: {dueBill.amount} Due Date: {dueBill.dueDate}
                     </strong> */}
@@ -144,7 +144,7 @@ class Dashboard extends Component {
             {this.state.paidBills.length ? (
               <List>
                 {this.state.paidBills.map(paidBill => (
-                  <ListItem>
+                  <ListItem key={paidBill.id}>
                     {/* <strong>
                       Name: {paidBill.RecurBill.name} Amount: {paidBill.amount} Due Date: {paidBill.dueDate}
                     </strong> */}
@@ -168,7 +168,7 @@ class Dashboard extends Component {
             {this.state.overdueBills.length ? (
               <List>
                 {this.state.overdueBills.map(overdueBill => (
-                  <ListItem>
+                  <ListItem key={overdueBill.id}>
                     {/* <strong>
                       Name: {overdueBill.RecurBill.name} Amount: {overdueBill.amount} Due Date: {overdueBill.dueDate}
                     </strong> */}
