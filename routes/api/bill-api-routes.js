@@ -15,7 +15,8 @@ router.get("/unpaid/:id/:month/:year", function (req, res) {
     include: [{
       model: db.RecurBill,
       where: {
-        UserId: req.params.id
+        UserId: req.params.id,
+        isActive: true
       }
     }]
   })
@@ -36,7 +37,8 @@ router.get("/paid/:id/:month/:year", function (req, res) {
     include: [{
       model: db.RecurBill,
       where: {
-        UserId: req.params.id
+        UserId: req.params.id,
+        isActive: true
       }
     }]
   })
@@ -59,7 +61,8 @@ router.get("/overdue/:id", function (req, res) {
     include: [{
       model: db.RecurBill,
       where: {
-        UserId: req.params.id
+        UserId: req.params.id,
+        isActive: true
       }
     }]
   })
@@ -93,7 +96,8 @@ router.get("/history/:id", function (req, res) {
     include: [{
       model: db.RecurBill,
       where: {
-        UserId: req.params.id
+        UserId: req.params.id,
+        isActive: true
       }
     }]
   })

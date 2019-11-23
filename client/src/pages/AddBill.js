@@ -57,7 +57,10 @@ class AddBills extends Component {
     });
   };
   deleteRecurBill = id => {
-    API.deleteRecurBill(id)
+    console.log("delete Clicked " + id)
+    API.deleteRecurBill(id, {
+      isActive: false
+    })
       .then(res => this.loadBills())
       .catch(err => console.log(err));
   };
@@ -143,8 +146,8 @@ class AddBills extends Component {
                 ))}
               </List>
             ) : (
-              <h3>No Results to Display</h3>
-            )}
+                <h3>No Results to Display</h3>
+              )}
           </Col>
         </Row>
       </Container>
