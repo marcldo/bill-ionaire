@@ -5,6 +5,7 @@ import API from "../utils/API";
 import Dashboard from "./Dashboard";
 import AddBill from "./AddBill";
 import History from "./History";
+import "../pages_css/members.css"
 
 class Members extends Component {
   state = {
@@ -30,10 +31,7 @@ class Members extends Component {
       <>
         <Router>
           <MembersNav user={this.state.userEmail} />
-          <div>
-            <h1>Welcome {}</h1>
-          </div>
-          <div>
+          <div className="billContent">
             <Route exact path="/dashboard" component={() => <Dashboard userId={this.state.userId} />} />
             <Route exact path="/add-bill" component={() => <AddBill userId={this.state.userId} />} />
             <Route exact path="/history" component={() => <History userId={this.state.userId} />} />
