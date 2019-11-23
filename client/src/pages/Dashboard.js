@@ -5,75 +5,52 @@ import { List, ListItem } from "../components/List";
 import Bill from "../components/Bill";
 
 class Dashboard extends Component {
-
-  state = {
-    dueBills: [],
-    paidBills: [],
-    overdueBills: [],
-    month: null,
-    year: null
-  };
-
-  componentDidMount() {
-    this.getCurrentTime();
-  };
-
-
-  getCurrentTime() {
-    const current = new Date()
-    const currentYear = current.getFullYear()
-    const currentMonth = current.getMonth() + 1;
-    this.loadBills(currentMonth);
+  constructor(props) {
+    super(props)
+    const [month, year] = this.getCurrentMonthYear();
+    this.state = {
+      dueBills: [],
+      paidBills: [],
+      overdueBills: [],
+      month,
+      year
+    };
   }
+
+
+
+  componentWillMount() {
+    this.loadBills();
+  };
+
+  componentDidUpdate() {
+    let billTotal = this.getTotal(this.state.dueBills);
+    console.log("bill total" + billTotal);
+  }
+
+  getCurrentMonthYear() {
+    const current = new Date()
+    const currentYear = current.getFullYear();
+    const currentMonth = current.getMonth() + 1;
+
+    return [currentMonth, currentYear];
+  }
+
 
   handleMonthChange = event => {
-    switch (event.target.value) {
-      case "January":
-        this.setState({ month: 1 })
-        break;
-      case "February":
-        this.setState({ month: 2 })
-        break;
-      case "March":
-        this.setState({ month: 3 })
-        break;
-      case "April":
-        this.setState({ month: 4 })
-        break;
-      case "May":
-        this.setState({ month: 5 })
-        break;
-      case "June":
-        this.setState({ month: 6 })
-        break;
-      case "July":
-        this.setState({ month: 7 })
-        break;
-      case "August":
-        this.setState({ month: 8 })
-        break;
-      case "September":
-        this.setState({ month: 9 })
-        break;
-      case "October":
-        this.setState({ month: 10 })
-        break;
-      case "November":
-        this.setState({ month: 11 })
-        break;
-      case "December":
-        this.setState({ month: 12 })
-        break;
-
-    }
+    this.setState({ month: Number(event.target.value) }, this.loadBills)
+  }
+  handleYearChange = event => {
+    this.setState({ year: Number(event.target.value) }, this.loadBills)
   }
 
-  loadBills = (month) => {
-    API.getDueBills(this.props.userId, 11)
+  loadBills = () => {
+    const { month, year } = this.state;
+    API.getDueBills(this.props.userId, month, year)
       .then(res => this.setState({ dueBills: res.data }))
       .catch(err => console.log(err));
 
-    API.getPaidBills(this.props.userId, 11)
+    API.getPaidBills(this.props.userId, month, year)
       .then(res => this.setState({ paidBills: res.data }))
       .catch(err => console.log(err));
 
@@ -82,14 +59,23 @@ class Dashboard extends Component {
       .catch(err => console.log(err));
   };
 
+  getTotal(arr) {
+    let total = 0;
+    for (let i = 0; i < arr.length; i++) {
+      total += Number(arr[i].amount);
+    }
+    return total.toFixed(2);
+  }
+
   render() {
+    const dueBillTotal = this.getTotal(this.state.dueBills);
+    const paidBillTotal = this.getTotal(this.state.paidBills);
+    const overdueBillTotal = this.getTotal(this.state.overdueBills);
     return (
       <Container fluid>
         <Row>
-          <Col size="md-4 sm-12">
-
-
-            {/* <label for="monthSelect">Month</label>
+          <Col size="md-2 sm-6">
+            <label for="monthSelect">Month</label>
             <select
               className="form-control"
               id="monthSelect"
@@ -97,22 +83,39 @@ class Dashboard extends Component {
               onChange={this.handleMonthChange}
               name="month"
             >
-              <option>January</option>
-              <option>February</option>
-              <option>March</option>
-              <option>April</option>
-              <option>May</option>
-              <option>June</option>
-              <option>July</option>
-              <option>August</option>
-              <option>September</option>
-              <option>October</option>
-              <option>November</option>
-              <option>December</option>
-            </select> */}
-
-
-            <h3>Due</h3>
+              <option value="1">January</option>
+              <option value="2">February</option>
+              <option value="3">March</option>
+              <option value="4">April</option>
+              <option value="5">May</option>
+              <option value="6">June</option>
+              <option value="7">July</option>
+              <option value="8">August</option>
+              <option value="9">September</option>
+              <option value="10">October</option>
+              <option value="11">November</option>
+              <option value="12">December</option>
+            </select>
+          </Col>
+          <Col size="md-2 sm-6">
+            <label for="yearSelect">Year</label>
+            <select
+              className="form-control"
+              id="yearSelect"
+              value={this.state.year}
+              onChange={this.handleYearChange}
+              name="month"
+            >
+              <option value="2019">2019</option>
+              <option value="2020">2020</option>
+              <option value="2021">2021</option>
+              <option value="2022">2022</option>
+            </select>
+          </Col>
+        </Row>
+        <Row>
+          <Col size="md-4 sm-12">
+            <h3>Due {dueBillTotal}</h3>
             {this.state.dueBills.length ? (
               <List>
                 {this.state.dueBills.map(dueBill => (
@@ -127,6 +130,7 @@ class Dashboard extends Component {
                       id={dueBill.id}
                       loadBills={this.loadBills}
                       btnTxt={"Pay"}
+                      key={dueBill.id}
                     />
                   </ListItem>
 
@@ -136,7 +140,7 @@ class Dashboard extends Component {
               (<h3>No Bills Are Due</h3>)}
           </Col>
           <Col size="md-4 sm-12">
-            <h3>Paid</h3>
+            <h3>Paid {paidBillTotal}</h3>
             {this.state.paidBills.length ? (
               <List>
                 {this.state.paidBills.map(paidBill => (
@@ -151,6 +155,7 @@ class Dashboard extends Component {
                       id={paidBill.id}
                       loadBills={this.loadBills}
                       btnTxt={"Update"}
+                      key={paidBill.id}
                     />
                   </ListItem>
                 ))}
@@ -159,7 +164,7 @@ class Dashboard extends Component {
               (<h3>No Bills Are Paid</h3>)}
           </Col>
           <Col size="md-4 sm-12">
-            <h3>Overdue</h3>
+            <h3>Overdue {overdueBillTotal}</h3>
             {this.state.overdueBills.length ? (
               <List>
                 {this.state.overdueBills.map(overdueBill => (
@@ -174,6 +179,7 @@ class Dashboard extends Component {
                       id={overdueBill.id}
                       loadBills={this.loadBills}
                       btnTxt={"Pay"}
+                      key={overdueBill.id}
                     />
                   </ListItem>
                 ))}
