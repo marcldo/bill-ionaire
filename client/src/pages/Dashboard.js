@@ -3,6 +3,8 @@ import API from "../utils/API";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import Bill from "../components/Bill";
+import LineExample from "../components/Line"
+import PieExample from "../components/Pie"
 
 class Dashboard extends Component {
   constructor(props) {
@@ -187,10 +189,12 @@ class Dashboard extends Component {
             ) :
               (<h3>No Bills Are Overdue</h3>)}
           </Col>
+          <LineExample />
+          <PieExample />
         </Row>
       </Container >
     )
   }
 
 }
-export default Dashboard
+export default Dashboard;

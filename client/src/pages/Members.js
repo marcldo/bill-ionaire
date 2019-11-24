@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import MembersNav from "../components/MembersNav";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
-import API from "../utils/API";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Dashboard from "./Dashboard";
 import AddBill from "./AddBill";
 import History from "./History";
