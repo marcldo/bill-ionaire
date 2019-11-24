@@ -1,8 +1,38 @@
-.col-md-4 {
+.list-overflow-container {
   display: flexbox;
-  background-color: rgb(0, 111, 247);
-  border: 5px solid red;
   color: white;
-  height: 100vh;
+  height: 50vh;
   overflow-x: hidden
+}
+
+.input-group-text{
+  background-color: #2C3339;
+  color:#5cb85c;
+  border: 1px solid #5cb85c;
+}
+.dashboard-input{
+  background-color: #2C3339;
+  color:#5cb85c;
+  border: 1px solid #5cb85c;
+}
+
+.dashboard-input:focus{
+  background-color: #2C3339;
+  color:#fff;
+  border: 1px solid #5cb85c;
+}
+
+.time-dropdown{
+  background-color: #2C3339;
+  color:#fff;
+  border: 1px solid #fff;
+}
+
+.time-dropdown:focus{
+  background-color: #2C3339;
+  color:#fff;
+  border: 1px solid #5cb85c;
+}
+hr{
+  /* border: 1px solid #6C757D; */
 }
