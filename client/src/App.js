@@ -15,6 +15,7 @@ class App extends Component {
     loggedInUser: null
   }
 
+
   async componentWillMount() {
     const res = await this.loadUser();
     if (res.data.id && !this.props.location.pathname.startsWith("/members")) {
@@ -39,12 +40,22 @@ class App extends Component {
     return res;
   }
 
+  logoutUser = async () => {
+    console.log("logout user function")
+    const res = await this.logoutAction();
+    if (!this.state.loggedInUser) {
+      this.props.history.push("/");
+    }
+    return res;
+  }
+
   logoutAction = async () => {
     // TODO figure this out
-    await API.logout();
+    const res = await API.logout();
     this.setState({
       loggedInUser: false
     });
+    return res;
   }
 
   render() {
@@ -59,6 +70,7 @@ class App extends Component {
             <Route exact path="/" component={Home} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/login" render={(props) => <Login {...props} user={this.state.loggedInUser} loadUser={this.loadUser} />} />
+            <Route exact path="/logout" />
             <Route path="/members" render={props => this.state.loggedInUser !== null && <Members {...props} user={this.state.loggedInUser} />} />
             <Route component={Notfound} />
           </Switch>

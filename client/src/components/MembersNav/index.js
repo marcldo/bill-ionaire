@@ -14,7 +14,7 @@ function MembersNav(props) {
       <div className="collapse navbar-collapse w-100 order-3 dual-collapse2" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item">
-            <Link to="/" className="nav-link">
+            <Link to="/" className={props.location.pathname === "/" ? "nav-link active" : "nav-link"}>
               Home
             </Link>
           </li>
@@ -24,12 +24,12 @@ function MembersNav(props) {
              </Link>
           </li>
           <li className="nav-item">
-            <Link to="/members/add-bill" className="nav-link">
+            <Link to="/members/add-bill" className={props.location.pathname === "/members/add-bill" ? "nav-link active" : "nav-link"}>
               Add Bill
              </Link>
           </li>
           <li className="nav-item">
-            <Link to="/members/history" className="nav-link">
+            <Link to="/members/history" className={props.location.pathname === "/members/history" ? "nav-link active" : "nav-link"}>
               History
              </Link>
           </li>

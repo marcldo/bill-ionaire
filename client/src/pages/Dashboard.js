@@ -75,6 +75,7 @@ class Dashboard extends Component {
     const overdueBillTotal = this.getTotal(this.state.overdueBills);
     return (
       <Container fluid>
+        <h1>Dashboard</h1>
         <Row>
           <Col size="md-2 sm-6">
             <label htmlFor="monthSelect">Month</label>
@@ -116,15 +117,12 @@ class Dashboard extends Component {
           </Col>
         </Row>
         <Row>
-          <Col size="md-4 sm-12">
+          <Col size="md-4 sm-12" styleClass="bill-box">
             <h3>Due {dueBillTotal}</h3>
             {this.state.dueBills.length ? (
               <List>
                 {this.state.dueBills.map(dueBill => (
                   <ListItem key={dueBill.id}>
-                    {/* <strong>
-                      Name: {dueBill.RecurBill.name} Amount: {dueBill.amount} Due Date: {dueBill.dueDate}
-                    </strong> */}
                     <Bill
                       name={dueBill.RecurBill.name}
                       amount={dueBill.amount}
@@ -141,15 +139,12 @@ class Dashboard extends Component {
             ) :
               (<h3>No Bills Are Due</h3>)}
           </Col>
-          <Col size="md-4 sm-12">
+          <Col size="md-4 sm-12" styleClass="bill-box">
             <h3>Paid {paidBillTotal}</h3>
             {this.state.paidBills.length ? (
               <List>
                 {this.state.paidBills.map(paidBill => (
                   <ListItem key={paidBill.id}>
-                    {/* <strong>
-                      Name: {paidBill.RecurBill.name} Amount: {paidBill.amount} Due Date: {paidBill.dueDate}
-                    </strong> */}
                     <Bill
                       name={paidBill.RecurBill.name}
                       amount={paidBill.amount}
@@ -165,15 +160,12 @@ class Dashboard extends Component {
             ) :
               (<h3>No Bills Are Paid</h3>)}
           </Col>
-          <Col size="md-4 sm-12">
+          <Col size="md-4 sm-12" styleClass="bill-box">
             <h3>Overdue {overdueBillTotal}</h3>
             {this.state.overdueBills.length ? (
               <List>
                 {this.state.overdueBills.map(overdueBill => (
                   <ListItem key={overdueBill.id}>
-                    {/* <strong>
-                      Name: {overdueBill.RecurBill.name} Amount: {overdueBill.amount} Due Date: {overdueBill.dueDate}
-                    </strong> */}
                     <Bill
                       name={overdueBill.RecurBill.name}
                       amount={overdueBill.amount}
