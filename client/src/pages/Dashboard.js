@@ -5,7 +5,6 @@ import { List, ListItem } from "../components/List";
 import Bill from "../components/Bill";
 import LineExample from "../components/Line"
 import PieExample from "../components/Pie"
-import RadarExample from "../components/Radar"
 import "../pages_css/dashboard.css"
 
 class Dashboard extends Component {
@@ -126,15 +125,12 @@ class Dashboard extends Component {
           </Col>
         </Row>
         <Row>
-          
-          <Col size="md-4 sm-12">
+
+          <Col size="md-6 sm-12">
             <LineExample />
           </Col>
-          <Col size="md-4 sm-12">
-            <PieExample />
-          </Col>
-          <Col size="md-4 sm-12">
-            <RadarExample />
+          <Col size="md-6 sm-12">
+            <PieExample dueBills={this.state.dueBills} paidBills={this.state.paidBills} />
           </Col>
 
         </Row>
