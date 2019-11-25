@@ -39,7 +39,7 @@ router.post("/signup", function (req, res) {
 // Route for logging user out
 router.get("/logout", function (req, res) {
   req.logout();
-  res.redirect("/");
+  res.sendStatus(200);
 });
 
 // Here we've add our isAuthenticated middleware to this route.

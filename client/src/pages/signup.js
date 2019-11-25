@@ -34,7 +34,6 @@ class Signup extends Component {
   render() {
     return (
       <>
-        <Nav />
         <Container fluid>
           <Row>
             <Col size="md-6">

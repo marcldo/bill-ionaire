@@ -39,7 +39,6 @@ class Login extends Component {
     }
     return (
       <>
-        <Nav />
         <Container fluid>
           <Row>
             <Col size="md-6">
