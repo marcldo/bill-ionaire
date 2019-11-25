@@ -1,38 +1,15 @@
-.list-overflow-container {
-  display: flexbox;
+body {
+  overflow-x: hidden;
+  font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   color: white;
-  height: 50vh;
-  overflow-x: hidden
+}
+.table thead th {
+  color: white;
 }
 
-.input-group-text{
-  background-color: #2C3339;
-  color:#5cb85c;
-  border: 1px solid #5cb85c;
-}
-.dashboard-input{
-  background-color: #2C3339;
-  color:#5cb85c;
-  border: 1px solid #5cb85c;
-}
-
-.dashboard-input:focus{
-  background-color: #2C3339;
-  color:#fff;
-  border: 1px solid #5cb85c;
-}
-
-.time-dropdown{
-  background-color: #2C3339;
-  color:#fff;
-  border: 1px solid #fff;
-}
-
-.time-dropdown:focus{
-  background-color: #2C3339;
-  color:#fff;
-  border: 1px solid #5cb85c;
-}
-hr{
-  /* border: 1px solid #6C757D; */
+.table td,
+.table th {
+  color: white;
 }

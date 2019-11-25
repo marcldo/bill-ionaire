@@ -3,12 +3,12 @@ import API from "../utils/API";
 import { Col, Row, Container } from "../components/Grid";
 import { Input, FormBtn } from "../components/Form";
 import Nav from "../components/Nav";
+import "../pages_css/signup.css";
 
 class Signup extends Component {
   state = {
     email: "",
     password: ""
-
   };
 
   handleInputChange = event => {
@@ -19,7 +19,6 @@ class Signup extends Component {
   };
 
   handleFormSubmit = event => {
-
     event.preventDefault();
     if (this.state.email && this.state.password) {
       API.saveUser({
@@ -51,9 +50,7 @@ class Signup extends Component {
                   placeholder="Password (required)"
                   type="password"
                 />
-                <FormBtn onClick={this.handleFormSubmit}>
-                  Sign Up
-              </FormBtn>
+                <FormBtn onClick={this.handleFormSubmit}>Sign Up</FormBtn>
               </form>
             </Col>
           </Row>
@@ -61,6 +58,6 @@ class Signup extends Component {
       </>
     );
   }
-};
+}
 
 export default Signup;

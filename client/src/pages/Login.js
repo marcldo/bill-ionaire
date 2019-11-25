@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { Input, FormBtn } from "../components/Form";
 import Nav from "../components/Nav";
+import "../pages_css/login.css";
 
 class Login extends Component {
   state = {
@@ -18,19 +19,19 @@ class Login extends Component {
     });
   };
 
-  handleFormSubmit = async (event) => {
+  handleFormSubmit = async event => {
     event.preventDefault();
 
     if (!this.state.email || !this.state.password) {
       return;
     }
-    const res = await API.loginUser(this.state.email, this.state.password)
+    const res = await API.loginUser(this.state.email, this.state.password);
     this.setState({
       email: "",
       password: ""
     });
     await this.props.loadUser();
-    this.props.history.push("/members/dashboard")
+    this.props.history.push("/members/dashboard");
   };
 
   render() {
