@@ -4,11 +4,13 @@ import { Col, Row, Container } from "../components/Grid";
 import "../pages_css/home.css";
 
 class Home extends React.Component {
+  componentDidMount() {
+    document.title = "Bill-ionaire Home";
+  }
   render() {
     return (
       <div>
         <header class="masthead">
-          <Nav />
           <Container style={{ marginTop: 30 }}>
             <div class="intro-text">
               <div class="intro-heading text-uppercase">

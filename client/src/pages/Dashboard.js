@@ -20,7 +20,9 @@ class Dashboard extends Component {
     };
   }
 
-
+  componentDidMount() {
+    document.title = "Bill-ionaire Dashboard";
+  }
 
   componentWillMount() {
     this.loadBills();

@@ -18,14 +18,14 @@ class Members extends Component {
 
     return (
       <>
-        <Router>
-          <MembersNav user={this.props.user.email} />
-          <div className="billContent">
-            <Route exact path="/members/dashboard" render={(props) => <Dashboard {...props} userId={this.props.user.id} />} />
-            <Route exact path="/members/add-bill" render={(props) => <AddBill {...props} userId={this.props.user.id} />} />
-            <Route exact path="/members/history" render={(props) => <History {...props} userId={this.props.user.id} />} />
-          </div>
-        </Router>
+
+
+        <div className="billContent">
+          <Route exact path="/members/dashboard" render={(props) => <Dashboard {...props} userId={this.props.user.id} />} />
+          <Route exact path="/members/add-bill" render={(props) => <AddBill {...props} userId={this.props.user.id} />} />
+          <Route exact path="/members/history" render={(props) => <History {...props} userId={this.props.user.id} />} />
+        </div>
+
       </>
     );
   }
