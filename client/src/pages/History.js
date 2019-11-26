@@ -36,7 +36,7 @@ class History extends React.Component {
                 </thead>
                 <tbody>
                   {this.state.bills.map(bill => (
-                    <tr>
+                    <tr key={bill.id}>
                       <td>{bill.Userid}</td>
                       <td>{bill.RecurBill.name}</td>
                       <td>{bill.amount}</td>

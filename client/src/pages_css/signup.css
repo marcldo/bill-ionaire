@@ -1,0 +1,17 @@
+.enter-form div.col-md-6 {
+  padding: 5%;
+  background-color: black;
+  border-radius: 25px;
+  /* display: flex;
+  justify-content: center; */
+}
+
+.sign-in-bg {
+  text-align: center;
+  background-image: url("../images/buildings.jpg");
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: left top;
+  background-size: cover;
+  padding: 20%;
+}
