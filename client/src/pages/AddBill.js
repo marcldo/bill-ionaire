@@ -11,7 +11,7 @@ class AddBills extends Component {
     bills: [],
     name: "",
     amount: null,
-    frequency: null,
+    frequency: "monthly",
     startDate: null
   };
 
@@ -26,15 +26,15 @@ class AddBills extends Component {
     this.loadBills();
     console.log("state: " + this.state.userId);
   }
-  handleAmountValidation = event => {
-    //form validation
-    let validAmount = /^[0-9]+\.?[0-9]*$/;
-    const { name, value } = event.target;
-    console.log(this.state.amount);
+  // handleAmountValidation = event => {
+  //   //form validation
+  //   let validAmount = /^[0-9]+\.?[0-9]*$/;
+  //   const { name, value } = event.target;
+  //   console.log(this.state.amount);
 
-    validAmount.test(value) ? console.log("valid") : console.log("invalid");
-    this.handleInputChange(event);
-  };
+  //   validAmount.test(value) ? console.log("valid") : console.log("invalid");
+  //   this.handleInputChange(event);
+  // };
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
@@ -58,7 +58,7 @@ class AddBills extends Component {
       startDate: this.state.startDate,
       UserId: this.props.userId
     })
-      .then(console.log("User Created"))
+      .then(recurBill => console.log("Bill Created", recurBill))
       .catch(err => console.log(err));
 
     // clear state
@@ -95,7 +95,7 @@ class AddBills extends Component {
                   <label for="exampleFormControlInput1">Amount</label>
                   <Input
                     value={this.state.amount}
-                    onChange={this.handleAmountValidation}
+                    onChange={this.handleInputChange}
                     name="amount"
                     type="number"
                     className="form-control"
@@ -152,8 +152,8 @@ class AddBills extends Component {
                   ))}
                 </List>
               ) : (
-                <h3>No Results to Display</h3>
-              )}
+                  <h3>No Results to Display</h3>
+                )}
             </Col>
           </Row>
         </Container>

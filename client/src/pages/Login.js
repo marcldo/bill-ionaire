@@ -3,7 +3,6 @@ import API from "../utils/API";
 import { Redirect } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { Input, FormBtn } from "../components/Form";
-import Nav from "../components/Nav";
 import "../pages_css/signup.css";
 
 class Login extends Component {

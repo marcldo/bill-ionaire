@@ -26,7 +26,6 @@ export default {
     return axios.get(`/api/recurbills/${userId}`);
   },
   postRecurBills: function (recurBills) {
-    alert("posted");
     return axios.post("/api/recurbills/create", recurBills);
   },
   deleteRecurBill: function (id, recurBills) {

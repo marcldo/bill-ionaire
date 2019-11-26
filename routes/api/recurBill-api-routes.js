@@ -4,7 +4,7 @@ const router = express.Router();
 const db = require("../../models");
 
 // GET route for getting all of the bills
-router.get("/api/recurbills", function (req, res) {
+router.get("/", function (req, res) {
   var query = {};
   if (req.query.UserId) {
     query.UserId = req.query.UserId;
@@ -47,7 +47,10 @@ router.post("/create", function (req, res) {
     .then(function (dbRecurBill) {
       res.json(dbRecurBill);
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      console.error(err)
+      res.status(400).json(err)
+    });
 });
 
 // DELETE route for deleting recurring bills
