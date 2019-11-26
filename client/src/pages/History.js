@@ -1,7 +1,6 @@
 import React from "react";
 import API from "../utils/API";
 import { Col, Row, Container, Table } from "../components/Grid";
-import "../pages_css/history.css";
 
 class History extends React.Component {
   state = {
