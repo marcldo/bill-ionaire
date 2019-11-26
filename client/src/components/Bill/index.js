@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Input, FormBtn } from "../Form"
+import { BillInput } from "../BillInput"
 import API from "../../utils/API";
 import "./component.css";
 
@@ -41,23 +42,30 @@ class Bill extends Component {
   render() {
     return (
       <div className="card bill" >
-        <div className="card-header">
-          {this.props.name}
-        </div>
         <div className="card-body">
-          <lable>
-            Amount
-        </lable>
-          <Input
-            defaultValue={this.props.amount}
-            value={this.state.amount}
-            onChange={this.handleInputChange}
-            name="amount"
-          />
-          <p class="card-text">Due Date {this.props.dueDate}</p>
-          <FormBtn onClick={this.handleFormSubmit}>{this.props.btnTxt}</FormBtn>
+          <h5 className="card-title">
+            {this.props.name}
+          </h5>
+          <h6 class="card-subtitle mb-2 text-muted">Due Date {this.props.dueDate}</h6>
+          <div className="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">$</span>
+            </div>
+            <input className="form-control dashboard-input"
+              defaultValue={this.props.amount}
+              value={this.state.amount}
+              onChange={this.handleInputChange}
+              btnTxt={this.props.btnTxt}
+              name="amount" />
+            <div class="input-group-append">
+              <button className="btn btn-outline-success" onClick={this.handleFormSubmit} type="button">{this.props.btnTxt}</button>
+            </div>
+          </div>
         </div>
       </div>
+
+
+
     );
   }
 };

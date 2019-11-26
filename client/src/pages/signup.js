@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import API from "../utils/API";
 import { Col, Row, Container } from "../components/Grid";
 import { Input, FormBtn } from "../components/Form";
-import Nav from "../components/Nav";
+
 
 class Signup extends Component {
   state = {
@@ -34,7 +34,6 @@ class Signup extends Component {
   render() {
     return (
       <>
-        <Nav />
         <Container fluid>
           <Row>
             <Col size="md-6">

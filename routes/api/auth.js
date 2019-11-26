@@ -11,7 +11,13 @@ var isAuthenticated = require("../../config/middleware/isAuthenticated");
 // If the user has valid login credentials, send them to the members page.
 // Otherwise the user will be sent an error
 router.post("/login", passport.authenticate("local"), function (req, res) {
-  res.json(req.user);
+  req.session.save(err => {
+    if (err) {
+      console.log(err);
+      return res.json({});
+    }
+    res.json(req.user);
+  });
 });
 
 // Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
@@ -33,7 +39,7 @@ router.post("/signup", function (req, res) {
 // Route for logging user out
 router.get("/logout", function (req, res) {
   req.logout();
-  res.redirect("/");
+  res.sendStatus(200);
 });
 
 // Here we've add our isAuthenticated middleware to this route.
