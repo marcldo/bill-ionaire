@@ -36,7 +36,7 @@ app.use(require("./routes"));
 
 // Send every request to the React app
 // Define any API routes before this runs
-app.get("*", function(req, res) {
+app.get("*", function (req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
@@ -89,15 +89,15 @@ function createNextBills() {
   });
 }
 
-const j = schedule.scheduleJob("* * * * *", createNextBills);
 
 // Syncing our database and logging a message to the user upon success
-db.sequelize.sync().then(function() {
-  app.listen(PORT, function() {
+db.sequelize.sync().then(function () {
+  app.listen(PORT, function () {
     console.log(
       "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
       PORT,
       PORT
     );
+    const j = schedule.scheduleJob("* * * * *", createNextBills);
   });
 });
