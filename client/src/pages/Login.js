@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import API from "../utils/API";
+import { Redirect } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { Input, FormBtn } from "../components/Form";
 import Nav from "../components/Nav";
@@ -17,23 +18,27 @@ class Login extends Component {
     });
   };
 
-  handleFormSubmit = event => {
+  handleFormSubmit = async event => {
     event.preventDefault();
 
     if (!this.state.email || !this.state.password) {
       return;
     }
-    API.loginUser(this.state.email, this.state.password);
+    const res = await API.loginUser(this.state.email, this.state.password);
     this.setState({
       email: "",
       password: ""
     });
+    await this.props.loadUser();
+    this.props.history.push("/members/dashboard");
   };
 
   render() {
+    if (this.props.user && this.props.id) {
+      return <Redirect to="/members/dashboard" />;
+    }
     return (
       <>
-        <Nav />
         <Container fluid>
           <Row>
             <Col size="md-6">

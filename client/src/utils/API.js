@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export default {
+  //user routes 
   saveUser: function (userData) {
     return axios.post("/api/signup", userData);
   },
@@ -9,18 +10,17 @@ export default {
       .post("/api/login", {
         email,
         password
-      })
-      .then(function () {
-        console.log("logged in");
-        window.location.replace("/members");
-      })
-      .catch(function (err) {
-        console.log(err);
       });
   },
   getUser: function () {
     return axios.get("/api/user_data");
   },
+  logout: function () {
+    return axios
+      .get("/api/logout");
+  },
+
+  //recurBill routes
   getRecurBills: function (userId) {
     console.log(userId);
     return axios.get(`/api/recurbills/${userId}`);
@@ -34,6 +34,7 @@ export default {
     return axios.put(`/api/recurbills/${id}`, recurBills);
   },
 
+  //bill routes
   getDueBills: function (id, month, year) {
     return axios.get(`/api/bills/unpaid/${id}/${month}/${year}`);
   },

@@ -6,11 +6,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faExpand, faPlus, faBell } from "@fortawesome/free-solid-svg-icons";
 
 class Home extends React.Component {
+  componentDidMount() {
+    document.title = "Bill-ionaire Home";
+  }
   render() {
     return (
       <div>
-        <header className="masthead">
-          <Nav />
+        <header class="masthead">
           <Container style={{ marginTop: 30 }}>
             <div className="intro-text">
               <div className="intro-heading text-uppercase">
