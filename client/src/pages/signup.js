@@ -8,7 +8,8 @@ import "../pages_css/signup.css";
 class Signup extends Component {
   state = {
     email: "",
-    password: ""
+    password: "",
+    phone: ""
   };
 
   handleInputChange = event => {
@@ -23,7 +24,8 @@ class Signup extends Component {
     if (this.state.email && this.state.password) {
       API.saveUser({
         email: this.state.email,
-        password: this.state.password
+        password: this.state.password,
+        phone: this.state.phone
       })
         .then(console.log("User Created"))
         .catch(err => console.log(err));
@@ -37,7 +39,7 @@ class Signup extends Component {
           <div className="enter-form">
             <div class="row justify-content-center">
               <Col size="md-6">
-                <h3>Welcome to new user!</h3>
+                <h3>Welcome to Billionaire!</h3>
                 <form>
                   <Input
                     value={this.state.email}
@@ -51,6 +53,12 @@ class Signup extends Component {
                     name="password"
                     placeholder="Password (required)"
                     type="password"
+                  />
+                  <Input
+                    value={this.state.phone}
+                    onChange={this.handleInputChange}
+                    name="phone"
+                    placeholder="4161231234"
                   />
                   <FormBtn onClick={this.handleFormSubmit}>Sign Up</FormBtn>
                 </form>

@@ -2,9 +2,10 @@ const express = require("express");
 const router = express.Router();
 
 const db = require("../../models");
+var isAuthenticated = require("../../config/middleware/isAuthenticated");
 
 // GET route for getting all of the bills
-router.get("/", function (req, res) {
+router.get("/", isAuthenticated, function (req, res) {
   var query = {};
   if (req.query.UserId) {
     query.UserId = req.query.UserId;
@@ -17,10 +18,10 @@ router.get("/", function (req, res) {
 });
 
 //GET route for retrieving all recurring bill for one user
-router.get("/:id", function (req, res) {
+router.get("/:id", isAuthenticated, function (req, res) {
   db.RecurBill.findAll({
     where: {
-      UserId: req.params.id,
+      UserId: req.user.id,
       isActive: true
     }
   }).then(function (dbRecurBill) {
@@ -41,8 +42,7 @@ router.get("/:id", function (req, res) {
 // });
 
 //POST route for saving a new recurring bill
-router.post("/create", function (req, res) {
-  console.log("route hit");
+router.post("/create", isAuthenticated, function (req, res) {
   db.RecurBill.create(req.body)
     .then(function (dbRecurBill) {
       res.json(dbRecurBill);
