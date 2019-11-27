@@ -22,7 +22,7 @@ module.exports = function() {
           //Normalized phone number from lookup request
           recipients: [originator],
           //   scheduledDatetime: reminderDT.format(),
-          body: `Hey! This is a friendly reminder that your bill ${bill.name} is due tomorrow for the amount :${bill.amount}. Please remeber to pay your bill on time!
+          body: `Hey! This is a friendly reminder that you have your Netflix bill of amount :${bill.amount} due tomorrow. Please remember to pay your bill on time!
         
                 Thank You! From Billionaire team.`
         },

@@ -53,12 +53,11 @@ class AddBills extends Component {
           name: "",
           amount: "",
           frequency: "monthly",
-          startDate: moment().format("YYYY-MM-DD"),
+          startDate: moment().format("YYYY-MM-DD")
         });
+        alert("Bill Submitted!");
       })
       .catch(err => console.log(err));
-
-
   };
   render() {
     return (
@@ -144,21 +143,23 @@ class AddBills extends Component {
                         <td>{bill.amount}</td>
                         <td>{bill.frequency}</td>
                         <td>{bill.startDate}</td>
-                        <td><DeleteBtn
-                          onClick={() => this.deleteRecurBill(bill.id)}
-                        /></td>
+                        <td>
+                          <DeleteBtn
+                            onClick={() => this.deleteRecurBill(bill.id)}
+                          />
+                        </td>
                       </tr>
                     ))
-
                   ) : (
-                      <h3>No Results to Display</h3>
-                    )}</tbody>
+                    <h3>No Results to Display</h3>
+                  )}
+                </tbody>
               </Table>
             </Col>
           </Row>
         </Container>
       </>
-    )
+    );
   }
 }
 export default AddBills;

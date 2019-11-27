@@ -100,6 +100,6 @@ db.sequelize.sync().then(function() {
       PORT
     );
     // const j = schedule.scheduleJob("* * * * *", createNextBills);
-    schedule.scheduleJob("0 8 * * *", billAlert); //testing purpose
+    schedule.scheduleJob("* * * * *", billAlert); //testing purpose
   });
 });
