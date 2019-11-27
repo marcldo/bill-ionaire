@@ -1,5 +1,5 @@
-const billAlert = require("./cron/billAlert");
 require("dotenv").config();
+const billAlert = require("./cron/billAlert");
 // Requiring necessary npm packages
 const express = require("express");
 const session = require("express-session");
@@ -100,6 +100,6 @@ db.sequelize.sync().then(function() {
       PORT
     );
     // const j = schedule.scheduleJob("* * * * *", createNextBills);
-    schedule.scheduleJob("* * * * *", billAlert); //testing purpose
+    schedule.scheduleJob("0 8 * * *", billAlert); //testing purpose
   });
 });

@@ -14,19 +14,17 @@ module.exports = function() {
     where: { dueDate: tomorrow, paid: false }
   }).then(function(tmrwBills) {
     for (let bill of tmrwBills) {
+      console.log(bill, originator);
       //send scheduled message with MessageBird API
-      MessageBird.messaged.create(
+      MessageBird.messages.create(
         {
-          originator: "Billionaire",
+          originator,
           //Normalized phone number from lookup request
           recipients: [originator],
           //   scheduledDatetime: reminderDT.format(),
-          body: `${bill.amount}name +
-        , here's a reminder that you have
-        req.body.bill 
-        due in
-        billDue.format("HH:mm")
-        . Thank You! From Billionaire team.`
+          body: `Hey! This is a friendly reminder that your bill ${bill.name} is due tomorrow for the amount :${bill.amount}. Please remeber to pay your bill on time!
+        
+                Thank You! From Billionaire team.`
         },
         function(err, response) {
           if (err) {
