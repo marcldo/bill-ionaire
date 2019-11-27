@@ -1,11 +1,8 @@
 import React, { Component } from "react";
 import API from "../utils/API";
 import DeleteBtn from "../components/DeleteBtn";
-import { Col, Row, Container } from "../components/Grid";
-import { List, ListItem } from "../components/List";
+import { Col, Row, Container, Table } from "../components/Grid";
 import { Input, FormBtn } from "../components/Form";
-import { number } from "prop-types";
-
 class AddBills extends Component {
   state = {
     bills: [],
@@ -14,7 +11,6 @@ class AddBills extends Component {
     frequency: "monthly",
     startDate: null
   };
-
   loadBills = () => {
     API.getRecurBills(this.props.userId)
       .then(res => this.setState({ bills: res.data }))
@@ -22,19 +18,9 @@ class AddBills extends Component {
   };
   componentDidMount() {
     console.log("props: " + this.props.userId);
-
     this.loadBills();
     console.log("state: " + this.state.userId);
   }
-  // handleAmountValidation = event => {
-  //   //form validation
-  //   let validAmount = /^[0-9]+\.?[0-9]*$/;
-  //   const { name, value } = event.target;
-  //   console.log(this.state.amount);
-
-  //   validAmount.test(value) ? console.log("valid") : console.log("invalid");
-  //   this.handleInputChange(event);
-  // };
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
@@ -58,9 +44,11 @@ class AddBills extends Component {
       startDate: this.state.startDate,
       UserId: this.props.userId
     })
-      .then(recurBill => console.log("Bill Created", recurBill))
+      .then(recurBill => {
+        console.log("Bill Created", recurBill);
+        this.loadBills();
+      })
       .catch(err => console.log(err));
-
     // clear state
     this.setState({
       name: null,
@@ -70,7 +58,6 @@ class AddBills extends Component {
       UserId: null
     });
   };
-
   render() {
     return (
       <>
@@ -137,115 +124,39 @@ class AddBills extends Component {
             </Col>
             <Col size="md-6 sm-12">
               <h1>My Bills</h1>
-              {this.state.bills.length ? (
-                <List>
-                  {this.state.bills.map(bill => (
-                    <ListItem key={bill.id}>
-                      <strong>
-                        {bill.name} {bill.amount} {bill.frequency}{" "}
-                        {bill.startDate}
-                      </strong>
-                      <DeleteBtn
-                        onClick={() => this.deleteRecurBill(bill.id)}
-                      />
-                    </ListItem>
-                  ))}
-                </List>
-              ) : (
-                  <h3>No Results to Display</h3>
-                )}
+              <Table>
+                <thead>
+                  <tr>
+                    <th>Bill</th>
+                    <th>Amount</th>
+                    <th>Frequency</th>
+                    <th>Start Date</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {this.state.bills.length ? (
+                    this.state.bills.map(bill => (
+                      <tr key={bill.id}>
+                        <td>{bill.name}</td>
+                        <td>{bill.amount}</td>
+                        <td>{bill.frequency}</td>
+                        <td>{bill.startDate}</td>
+                        <td><DeleteBtn
+                          onClick={() => this.deleteRecurBill(bill.id)}
+                        /></td>
+                      </tr>
+                    ))
+
+                  ) : (
+                      <h3>No Results to Display</h3>
+                    )}</tbody>
+              </Table>
             </Col>
           </Row>
         </Container>
       </>
-
-      // render() {
-      //   return (
-      //     <Container fluid>
-      //       <Row>
-      //         <Col size="md-6">
-      //           <h1>Bills</h1>
-
-      //           <form>
-      //             <div className="form-group">
-      //               <label for="exampleFormControlInput1">Bill Name</label>
-      //               <Input
-      //                 value={this.state.name}
-      //                 onChange={this.handleInputChange}
-      //                 name="name"
-      //                 type="text"
-      //                 className="form-control"
-      //                 id="exampleFormControlInput1"
-      //                 placeholder="Netflix"
-      //               />
-      //             </div>
-      //             <div className="form-group">
-      //               <label for="exampleFormControlInput1">Amount</label>
-      //               <Input
-      //                 value={this.state.amount}
-      //                 onChange={this.handleInputChange}
-      //                 name="amount"
-      //                 type="amount"
-      //                 className="form-control"
-      //                 id="exampleFormControlInput1"
-      //                 placeholder="9.99"
-      //               />
-      //             </div>
-      //             <div className="form-group">
-      //               <label for="exampleFormControlSelect1">Frequency</label>
-      //               <select
-      //                 className="form-control"
-      //                 id="exampleFormControlSelect1"
-      //                 value={this.state.frequency}
-      //                 onChange={this.handleInputChange}
-      //                 name="frequency"
-      //               >
-      //                 <option>bi-weekly</option>
-      //                 <option>quarterly</option>
-      //                 <option>semi-annually</option>
-      //                 <option>annually</option>
-      //                 <option>monthly</option>
-      //               </select>
-      //             </div>
-      //             <div className="form-group">
-      //               <label for="exampleFormControlSelect2">Start Date</label>
-      //               <Input
-      //                 value={this.state.startDate}
-      //                 onChange={this.handleInputChange}
-      //                 name="startDate"
-      //                 type="date"
-      //                 className="form-control"
-      //                 id="exampleFormControlInput1"
-      //               />
-      //             </div>
-      //             <div className="text-center">
-      //               <FormBtn onClick={this.handleFormSubmit}>SUBMIT!</FormBtn>
-      //             </div>
-      //           </form>
-      //         </Col>
-      //         <Col size="md-6 sm-12">
-      //           <h1>My Bills</h1>
-
-      //           {this.state.bills.length ? (
-      //             <List>
-      //               {this.state.bills.map(bill => (
-      //                 <ListItem key={bill.id}>
-      //                   <strong>
-      //                     {bill.name} {bill.amount} {bill.frequency}{" "}
-      //                     {bill.startDate}
-      //                   </strong>
-
-      //                   <DeleteBtn onClick={() => this.deleteRecurBill(bill.id)} />
-      //                 </ListItem>
-      //               ))}
-      //             </List>
-      //           ) : (
-      //               <h3>No Results to Display</h3>
-      //             )}
-      //         </Col>
-      //       </Row>
-      //     </Container>
-    );
+    )
   }
 }
 export default AddBills;

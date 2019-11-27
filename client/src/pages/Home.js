@@ -1,9 +1,9 @@
 import React from "react";
-import Nav from "../components/Nav";
-import { Col, Row, Container } from "../components/Grid";
+import { Container } from "../components/Grid";
 import "../pages_css/home.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExpand, faPlus, faBell } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 class Home extends React.Component {
   componentDidMount() {
@@ -159,29 +159,29 @@ class Home extends React.Component {
                   <div className="col-md-4">
                     <ul className="list-inline social-buttons">
                       <li className="list-inline-item">
-                        <a href="#">
+                        <Link>
                           <i className="fab fa-twitter"></i>
-                        </a>
+                        </Link>
                       </li>
                       <li className="list-inline-item">
-                        <a href="#">
+                        <Link>
                           <i className="fab fa-facebook-f"></i>
-                        </a>
+                        </Link>
                       </li>
                       <li className="list-inline-item">
-                        <a href="#">
+                        <Link>
                           <i className="fab fa-linkedin-in"></i>
-                        </a>
+                        </Link>
                       </li>
                     </ul>
                   </div>
                   <div className="col-md-4">
                     <ul className="list-inline quicklinks">
                       <li className="list-inline-item">
-                        <a href="#">Privacy Policy</a>
+                        <Link>Privacy Policy</Link>
                       </li>
                       <li className="list-inline-item">
-                        <a href="#">Terms of Use</a>
+                        <Link>Terms of Use</Link>
                       </li>
                     </ul>
                   </div>
