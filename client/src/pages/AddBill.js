@@ -3,13 +3,15 @@ import API from "../utils/API";
 import DeleteBtn from "../components/DeleteBtn";
 import { Col, Row, Container, Table } from "../components/Grid";
 import { Input, FormBtn } from "../components/Form";
+import moment from "moment";
+
 class AddBills extends Component {
   state = {
     bills: [],
     name: "",
-    amount: null,
+    amount: "",
     frequency: "monthly",
-    startDate: null
+    startDate: moment().format("YYYY-MM-DD")
   };
   loadBills = () => {
     API.getRecurBills(this.props.userId)
@@ -47,16 +49,16 @@ class AddBills extends Component {
       .then(recurBill => {
         console.log("Bill Created", recurBill);
         this.loadBills();
+        this.setState({
+          name: "",
+          amount: "",
+          frequency: "monthly",
+          startDate: moment().format("YYYY-MM-DD"),
+        });
       })
       .catch(err => console.log(err));
-    // clear state
-    this.setState({
-      name: null,
-      amount: null,
-      frequency: null,
-      startDate: null,
-      UserId: null
-    });
+
+
   };
   render() {
     return (
