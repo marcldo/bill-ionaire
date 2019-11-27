@@ -26,7 +26,8 @@ router.post("/login", passport.authenticate("local"), function (req, res) {
 router.post("/signup", function (req, res) {
   db.User.create({
     email: req.body.email,
-    password: req.body.password
+    password: req.body.password,
+    phone: req.body.phone
   })
     .then(function (newUser) {
       res.status(201).json(newUser);
