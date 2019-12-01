@@ -1,9 +1,9 @@
 import React from "react";
-import Nav from "../components/Nav";
 import { Container } from "../components/Grid";
 import "../pages_css/home.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock, faChartLine, faFileInvoiceDollar, faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 class Home extends React.Component {
   componentDidMount() {
@@ -13,31 +13,31 @@ class Home extends React.Component {
     return (
       <div>
         <section>
-        <header className="masthead">
-          <Container style={{ marginTop: 30 }}>
-            <div className="intro-text">
-              <div className="intro-heading text-uppercase">
-                Track your bills
+          <header className="masthead">
+            <Container style={{ marginTop: 30 }}>
+              <div className="intro-text">
+                <div className="intro-heading text-uppercase">
+                  Track your bills
               </div>
-              <div className="intro-lead-in">
-                Set your self up for Financial Freedom
+                <div className="intro-lead-in">
+                  Set your self up for Financial Freedom
               </div>
-              <a
-                className="btn btn-warning btn-xl text-uppercase"
-                href="#services"
-              >
-                More Info
+                <a
+                  className="btn btn-warning btn-xl text-uppercase"
+                  href="#services"
+                >
+                  More Info
               </a>
-            </div>
-          </Container>
-        </header>
+              </div>
+            </Container>
+          </header>
           <Container style={{ marginTop: 30 }}>
             <section className="page-section" id="services">
               <div className="row">
                 <div className="col-lg-12 text-center">
                   <h2 className="section-heading text-uppercase">Services</h2>
                   <h3 className="section-subheading text-muted">
-                    Personal finance app that helps you to stay on top of your bills.<br /> 
+                    Personal finance app that helps you to stay on top of your bills.<br />
                     Monitoring your spending is a breeze with our cutting edge tools.
                   </h3>
                 </div>
@@ -59,7 +59,7 @@ class Home extends React.Component {
                   </span>
                   <h4 className="service-heading">No Overdue Bills</h4>
                   <p className="text-muted">
-                    This app is simple and easy to use which helps you see your 
+                    This app is simple and easy to use which helps you see your
                     bills status to avoid any unwanted Overdue Bills.
                   </p>
                 </div>
@@ -69,7 +69,7 @@ class Home extends React.Component {
                   </span>
                   <h4 className="service-heading">Track Your Spending</h4>
                   <p className="text-muted">
-                    This app has Nice Visuals with graph and chart to maintain 
+                    This app has Nice Visuals with graph and chart to maintain
                     and Track Your Spending for better control over your finance.
                   </p>
                 </div>
@@ -91,45 +91,45 @@ class Home extends React.Component {
                 </div>
                 <div className="row text-center">
                   <div className="col-sm-3">
-                  <span className="fa-stack fa-2x">
-                    <FontAwesomeIcon icon={faAngleDown} className="text-yellow" />
-                  </span>
+                    <span className="fa-stack fa-2x">
+                      <FontAwesomeIcon icon={faAngleDown} className="text-yellow" />
+                    </span>
                     <div className="team-member">
                       <h4>Marc Felizardo</h4>
                       <p className="text-muted">Developer</p>
                     </div>
                   </div>
                   <div className="col-sm-3">
-                  <span className="fa-stack fa-2x">
-                    <FontAwesomeIcon icon={faAngleDown} className="text-yellow" />
-                  </span>
+                    <span className="fa-stack fa-2x">
+                      <FontAwesomeIcon icon={faAngleDown} className="text-yellow" />
+                    </span>
                     <div className="team-member">
                       <h4>Wajiha Ahmad</h4>
                       <p className="text-muted">Developer</p>
                     </div>
                   </div>
                   <div className="col-sm-3">
-                  <span className="fa-stack fa-2x">
-                    <FontAwesomeIcon icon={faAngleDown} className="text-yellow" />
-                  </span>
+                    <span className="fa-stack fa-2x">
+                      <FontAwesomeIcon icon={faAngleDown} className="text-yellow" />
+                    </span>
                     <div className="team-member">
                       <h4>Christine Hong</h4>
                       <p className="text-muted">Developer</p>
                     </div>
                   </div>
                   <div className="col-sm-3">
-                  <span className="fa-stack fa-2x">
-                    <FontAwesomeIcon icon={faAngleDown} className="text-yellow" />
-                  </span>
+                    <span className="fa-stack fa-2x">
+                      <FontAwesomeIcon icon={faAngleDown} className="text-yellow" />
+                    </span>
                     <div className="team-member">
                       <h4>Poonam Halani</h4>
                       <p className="text-muted">Developer</p>
                     </div>
                   </div>
-                </div>
-              </div>
-            </section>
-          </Container>
+                </div >
+              </div >
+            </section >
+          </Container >
           <Container style={{ marginTop: 30 }}>
             <footer className="footer">
               <div className="container">
@@ -142,29 +142,29 @@ class Home extends React.Component {
                   <div className="col-md-4">
                     <ul className="list-inline social-buttons">
                       <li className="list-inline-item">
-                        <a href="#">
+                        <Link>
                           <i className="fab fa-twitter"></i>
-                        </a>
+                        </Link>
                       </li>
                       <li className="list-inline-item">
-                        <a href="#">
+                        <Link>
                           <i className="fab fa-facebook-f"></i>
-                        </a>
+                        </Link>
                       </li>
                       <li className="list-inline-item">
-                        <a href="#">
+                        <Link>
                           <i className="fab fa-linkedin-in"></i>
-                        </a>
+                        </Link>
                       </li>
                     </ul>
                   </div>
                   <div className="col-md-4">
                     <ul className="list-inline quicklinks">
                       <li className="list-inline-item">
-                        <a href="#">Privacy Policy</a>
+                        <Link>Privacy Policy</Link>
                       </li>
                       <li className="list-inline-item">
-                        <a href="#">Terms of Use</a>
+                        <Link>Terms of Use</Link>
                       </li>
                     </ul>
                   </div>
@@ -172,8 +172,8 @@ class Home extends React.Component {
               </div>
             </footer>
           </Container>
-        </section>
-      </div>
+        </section >
+      </div >
     );
   }
 }
