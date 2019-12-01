@@ -2,7 +2,7 @@ import React from "react";
 import { Container } from "../components/Grid";
 import "../pages_css/home.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faExpand, faEye, faBell, faChartLine } from "@fortawesome/free-solid-svg-icons";
+import { faClock, faChartLine, faFileInvoiceDollar, faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
 class Home extends React.Component {
@@ -12,33 +12,33 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <header className="masthead">
-          <Container style={{ marginTop: 30 }}>
-            <div className="intro-text">
-              <div className="intro-heading text-uppercase">
-                Track your bills
-              </div>
-              <div className="intro-lead-in">
-                Set your self up for Financial Freedom
-              </div>
-              <a
-                className="btn btn-warning btn-xl text-uppercase"
-                href="#services"
-              >
-                GET STARTED
-              </a>
-            </div>
-          </Container>
-        </header>
         <section>
+          <header className="masthead">
+            <Container style={{ marginTop: 30 }}>
+              <div className="intro-text">
+                <div className="intro-heading text-uppercase">
+                  Track your bills
+              </div>
+                <div className="intro-lead-in">
+                  Set your self up for Financial Freedom
+              </div>
+                <a
+                  className="btn btn-warning btn-xl text-uppercase"
+                  href="#services"
+                >
+                  More Info
+              </a>
+              </div>
+            </Container>
+          </header>
           <Container style={{ marginTop: 30 }}>
             <section className="page-section" id="services">
               <div className="row">
                 <div className="col-lg-12 text-center">
                   <h2 className="section-heading text-uppercase">Services</h2>
                   <h3 className="section-subheading text-muted">
-                    A personal finance application that helps track your spending.
-                    <br />We make paying your bills on time a breeze.
+                    A Personal finance app that helps you to stay on top of your bills.<br />
+                    Monitoring your spending is a breeze with our cutting edge tools.
                   </h3>
                 </div>
               </div>
@@ -47,34 +47,37 @@ class Home extends React.Component {
                   <span className="fa-stack fa-4x">
                     <FontAwesomeIcon icon={faChartLine} className="text-yellow" />
                   </span>
-                  <h4 className="service-heading">Improve your credit score.</h4>
+                  <h4 className="service-heading">Better Credit Score</h4>
                   <p className="text-muted">
-                    Make your payments on time.
+                    One convenient app to add, delete and update your bills.
+                    Which eventually helps in maintaining better credit score.
                   </p>
                 </div>
                 <div className="col-md-4">
                   <span className="fa-stack fa-4x">
-                    <FontAwesomeIcon icon={faBell} className="text-yellow" />
+                    <FontAwesomeIcon icon={faClock} className="text-yellow" />
                   </span>
-                  <h4 className="service-heading">Bill Reminder</h4>
+                  <h4 className="service-heading">No Overdue Bills</h4>
                   <p className="text-muted">
-                    This app Reminds you before you miss your duedate.
+                    This app is simple and easy to use which helps you see your
+                    bills status to avoid any unwanted overdue bills.
                   </p>
                 </div>
                 <div className="col-md-4">
                   <span className="fa-stack fa-4x">
-                    <FontAwesomeIcon icon={faEye} className="text-yellow" />
+                    <FontAwesomeIcon icon={faFileInvoiceDollar} className="text-yellow" />
                   </span>
-                  <h4 className="service-heading">Monitor Spending</h4>
+                  <h4 className="service-heading">Track Your Spending</h4>
                   <p className="text-muted">
-                    All your bills tracked in one easy to use application.
+                    Our dashboard offers graphs and charts to monitor
+                    and track Your spending for better control over your finance.
                   </p>
                 </div>
               </div>
             </section>
           </Container>
           <Container style={{ marginTop: 30 }}>
-            <section className="bg-light page-section" id="team">
+            <section className="page-section" id="team">
               <div className="container">
                 <div className="row">
                   <div className="col-lg-12 text-center">
@@ -82,69 +85,51 @@ class Home extends React.Component {
                       Our Amazing Team
                     </h2>
                     <h3 className="section-subheading text-muted">
-                      This app is created by aour amazing team.
+                      This app is created by our amazing team.
                     </h3>
                   </div>
                 </div>
-                <div className="row">
+                <div className="row text-center">
                   <div className="col-sm-3">
+                    <span className="fa-stack fa-2x">
+                      <FontAwesomeIcon icon={faAngleDown} className="text-yellow" />
+                    </span>
                     <div className="team-member">
-                      {/* <img
-                        className="mx-auto rounded-circle"
-                        src="img/team/1.jpg"
-                        alt=""
-                      ></img> */}
-                      {/* <i class="far fa-circle"></i> */}
                       <h4>Marc Felizardo</h4>
                       <p className="text-muted">Developer</p>
                     </div>
                   </div>
                   <div className="col-sm-3">
+                    <span className="fa-stack fa-2x">
+                      <FontAwesomeIcon icon={faAngleDown} className="text-yellow" />
+                    </span>
                     <div className="team-member">
-                      {/* <img
-                        className="mx-auto rounded-circle"
-                        src="img/team/2.jpg"
-                        alt=""
-                      ></img> */}
                       <h4>Wajiha Ahmad</h4>
                       <p className="text-muted">Developer</p>
                     </div>
                   </div>
                   <div className="col-sm-3">
+                    <span className="fa-stack fa-2x">
+                      <FontAwesomeIcon icon={faAngleDown} className="text-yellow" />
+                    </span>
                     <div className="team-member">
-                      {/* <img
-                        className="mx-auto rounded-circle"
-                        src="img/team/2.jpg"
-                        alt=""
-                      ></img> */}
                       <h4>Christine Hong</h4>
                       <p className="text-muted">Developer</p>
                     </div>
                   </div>
                   <div className="col-sm-3">
+                    <span className="fa-stack fa-2x">
+                      <FontAwesomeIcon icon={faAngleDown} className="text-yellow" />
+                    </span>
                     <div className="team-member">
-                      {/* <img
-                        className="mx-auto rounded-circle"
-                        src="img/team/3.jpg"
-                        alt=""
-                      ></img> */}
                       <h4>Poonam Halani</h4>
                       <p className="text-muted">Developer</p>
                     </div>
                   </div>
-                </div>
-                {/* <div className="row">
-                  <div className="col-lg-8 mx-auto text-center">
-                    <p className="large text-muted">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                      Aut eaque, laboriosam veritatis, quos non quis ad
-                      perspiciatis, totam corporis ea, alias ut unde.
-                    </p>
-                  </div>
-                </div> */}
-              </div>
-            </section>
-          </Container>
+                </div >
+              </div >
+            </section >
+          </Container >
           <Container style={{ marginTop: 30 }}>
             <footer className="footer">
               <div className="container">
@@ -187,8 +172,8 @@ class Home extends React.Component {
               </div>
             </footer>
           </Container>
-        </section>
-      </div>
+        </section >
+      </div >
     );
   }
 }
