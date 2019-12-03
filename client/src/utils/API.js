@@ -39,7 +39,9 @@ export default {
     return axios.get(`/api/bills/unpaid/${id}/${month}/${year}`);
   },
   getPaidBills: function (id, month, year) {
+    console.log(`/api/bills/paid/${id}/${month}/${year}`)
     return axios.get(`/api/bills/paid/${id}/${month}/${year}`);
+
   },
   getOverdueBills: function (id) {
     return axios.get(`/api/bills/overdue/${id}`);

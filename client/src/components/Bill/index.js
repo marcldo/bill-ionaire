@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { Input, FormBtn } from "../Form"
-import { BillInput } from "../BillInput"
 import API from "../../utils/API";
 import "./component.css";
 
