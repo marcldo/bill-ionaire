@@ -6,6 +6,7 @@ import Bill from "../components/Bill";
 import LineExample from "../components/Line"
 import PieExample from "../components/Pie"
 import "../pages_css/dashboard.css"
+const moment = require("moment");
 
 class Dashboard extends Component {
   constructor(props) {
@@ -15,6 +16,10 @@ class Dashboard extends Component {
       dueBills: [],
       paidBills: [],
       overdueBills: [],
+      prevFourBills: [],
+      prevThreeBills: [],
+      prevTwoBills: [],
+      prevOneBills: [],
       month,
       year
     };
@@ -26,12 +31,9 @@ class Dashboard extends Component {
 
   componentWillMount() {
     this.loadBills();
+    this.getPreviousMonthsData();
   };
 
-  componentDidUpdate() {
-    let billTotal = this.getTotal(this.state.dueBills);
-    console.log("bill total" + billTotal);
-  }
 
   getCurrentMonthYear() {
     const current = new Date()
@@ -39,6 +41,35 @@ class Dashboard extends Component {
     const currentMonth = current.getMonth() + 1;
 
     return [currentMonth, currentYear];
+  }
+
+  getPreviousMonthsData = () => {
+
+    //get previous four months date and year
+    const fourMonth = moment().subtract(3, 'months').month();
+    const fourYear = moment().subtract(3, 'months').year();
+    const threeMonth = moment().subtract(2, 'months').month();
+    const threeYear = moment().subtract(2, 'months').year();
+    const twoMonth = moment().subtract(1, 'months').month();
+    const twoYear = moment().subtract(1, 'months').year();
+    const oneMonth = moment().subtract(0, 'months').month();
+    const oneYear = moment().subtract(0, 'months').year();
+
+    console.log("prev 4month " + this.props.userId + fourMonth + fourYear)
+
+    //call api for the data and set 
+    API.getPaidBills(this.props.userId, fourMonth, fourYear)
+      .then(res => this.setState({ prevFourBills: res.data }))
+      .catch(err => console.log(err));
+    API.getPaidBills(this.props.userId, threeMonth, threeYear)
+      .then(res => this.setState({ prevThreeBills: res.data }))
+      .catch(err => console.log(err));
+    API.getPaidBills(this.props.userId, twoMonth, twoYear)
+      .then(res => this.setState({ prevTwoBills: res.data }))
+      .catch(err => console.log(err));
+    API.getPaidBills(this.props.userId, oneMonth, oneYear)
+      .then(res => this.setState({ prevOneBills: res.data }))
+      .catch(err => console.log(err));
   }
 
 
@@ -76,6 +107,23 @@ class Dashboard extends Component {
     const dueBillTotal = this.getTotal(this.state.dueBills);
     const paidBillTotal = this.getTotal(this.state.paidBills);
     const overdueBillTotal = this.getTotal(this.state.overdueBills);
+
+    //get previous months bills totals
+    const prevFourTotal = this.getTotal(this.state.prevFourBills);
+    const prevThreeTotal = this.getTotal(this.state.prevThreeBills);
+    const prevTwoTotal = this.getTotal(this.state.prevTwoBills);
+    const prevOneTotal = this.getTotal(this.state.prevOneBills);
+
+    //month labels 
+    const fourLabel = moment().subtract(4, 'months').format("MMMM");
+    const threeLabel = moment().subtract(3, 'months').format("MMMM");
+    const twoLabel = moment().subtract(2, 'months').format("MMMM");
+    const oneLabel = moment().subtract(1, 'months').format("MMMM");
+
+
+
+
+
     return (
       <Container fluid>
         <Row>
@@ -129,7 +177,15 @@ class Dashboard extends Component {
         <Row>
 
           <Col size="md-6 sm-12">
-            <LineExample />
+            <LineExample
+              label4={fourLabel}
+              label3={threeLabel}
+              label2={twoLabel}
+              label1={oneLabel}
+              month4={prevFourTotal}
+              month3={prevThreeTotal}
+              month2={prevTwoTotal}
+              month1={prevOneTotal} />
           </Col>
           <Col size="md-6 sm-12">
             <PieExample dueBills={this.state.dueBills} paidBills={this.state.paidBills} />

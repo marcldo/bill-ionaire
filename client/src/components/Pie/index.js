@@ -14,7 +14,6 @@ class PieExample extends Component {
 
   }
   getLabels() {
-    console.log(this.props.dueBills)
     let labels = [];
     for (let i = 0; i < this.props.dueBills.length; i++) {
       labels.push(this.props.dueBills[i].RecurBill.name)
@@ -22,7 +21,6 @@ class PieExample extends Component {
     for (let i = 0; i < this.props.paidBills.length; i++) {
       labels.push(this.props.paidBills[i].RecurBill.name)
     }
-    console.log("labels ", labels)
     return labels;
   }
 
@@ -34,7 +32,6 @@ class PieExample extends Component {
     for (let i = 0; i < this.props.paidBills.length; i++) {
       data.push(this.props.paidBills[i].amount)
     }
-    console.log("data ", data)
     return data;
   }
 
@@ -48,7 +45,7 @@ class PieExample extends Component {
       colours.push('#' + Math.floor(Math.random() * 16777215).toString(16))
 
     }
-    console.log("data ", colours)
+
     return colours;
 
   }
