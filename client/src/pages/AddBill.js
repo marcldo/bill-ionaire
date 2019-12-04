@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import API from "../utils/API";
 import DeleteBtn from "../components/DeleteBtn";
+import { FormErrors } from "../components/FormErrors"
 import { Col, Row, Container, Table } from "../components/Grid";
 import { Input, FormBtn } from "../components/Form";
+import "../pages_css/addBill.css"
 import moment from "moment";
 
 class AddBills extends Component {
@@ -11,7 +13,11 @@ class AddBills extends Component {
     name: "",
     amount: "",
     frequency: "monthly",
-    startDate: moment().format("YYYY-MM-DD")
+    startDate: moment().format("YYYY-MM-DD"),
+    formErrors: { name: "", amount: "" },
+    nameValid: false,
+    amountValid: false,
+    formValid: false
   };
   loadBills = () => {
     API.getRecurBills(this.props.userId)
@@ -19,18 +25,43 @@ class AddBills extends Component {
       .catch(err => console.log(err));
   };
   componentDidMount() {
-    console.log("props: " + this.props.userId);
     this.loadBills();
-    console.log("state: " + this.state.userId);
   }
   handleInputChange = event => {
     const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
+    this.setState({ [name]: value },
+      () => { this.validateField(name, value) });
   };
+  validateField(fieldName, value) {
+    let fieldValidationErrors = this.state.formErrors;
+    let nameValid = this.state.nameValid;
+    let amountValid = this.state.amountValid;
+
+    switch (fieldName) {
+      case "name":
+        nameValid = value.length >= 2;
+        fieldValidationErrors.name = nameValid ? "" : "Please give your bill a name"
+        break;
+      case "amount":
+        amountValid = value > 0;
+        fieldValidationErrors.amount = amountValid ? "" : "Please enter an amount"
+        break;
+      default:
+        break;
+    }
+    this.setState({
+      formErrors: fieldValidationErrors,
+      nameValid,
+      amountValid
+    }, this.validateForm);
+  }
+  validateForm() {
+    this.setState({ formValid: this.state.nameValid && this.state.amountValid })
+  }
+  errorClass(error) {
+    return (error.length === 0 ? "" : "has-error");
+  }
   deleteRecurBill = id => {
-    console.log("delete Clicked " + id);
     API.deleteRecurBill(id, {
       isActive: false
     })
@@ -44,6 +75,7 @@ class AddBills extends Component {
       amount: this.state.amount,
       frequency: this.state.frequency,
       startDate: this.state.startDate,
+      isActive: 1,
       UserId: this.props.userId
     })
       .then(recurBill => {
@@ -54,10 +86,13 @@ class AddBills extends Component {
           amount: "",
           frequency: "monthly",
           startDate: moment().format("YYYY-MM-DD"),
+          formErrors: { name: "", amount: "" },
+          nameValid: false,
+          amountValid: false,
+          formValid: false
         });
       })
       .catch(err => console.log(err));
-
 
   };
   render() {
@@ -68,7 +103,8 @@ class AddBills extends Component {
             <Col size="md-6">
               <h1>Bills</h1>
               <form>
-                <div className="form-group">
+                <div className={`form-group 
+                ${this.errorClass(this.state.formErrors.name)}`}>
                   <label for="exampleFormControlInput1">Bill Name</label>
                   <Input
                     value={this.state.name}
@@ -80,7 +116,8 @@ class AddBills extends Component {
                     placeholder="Netflix"
                   />
                 </div>
-                <div className="form-group">
+                <div className={`form-group 
+                ${this.errorClass(this.state.formErrors.amount)}`}>
                   <label for="exampleFormControlInput1">Amount</label>
                   <Input
                     value={this.state.amount}
@@ -120,9 +157,14 @@ class AddBills extends Component {
                   />
                 </div>
                 <div className="text-center">
-                  <FormBtn onClick={this.handleFormSubmit}>SUBMIT!</FormBtn>
+                  <FormBtn disabled={!this.state.formValid} onClick={this.handleFormSubmit}>SUBMIT!</FormBtn>
                 </div>
               </form>
+
+              <div className="panel has-error">
+                {/* iterates through all the form validation errors and displays them. */}
+                <FormErrors formErrors={this.state.formErrors} />
+              </div>
             </Col>
             <Col size="md-6 sm-12">
               <h1>My Bills</h1>

@@ -55,9 +55,7 @@ class Dashboard extends Component {
     const oneMonth = moment().subtract(0, 'months').month();
     const oneYear = moment().subtract(0, 'months').year();
 
-    console.log("prev 4month " + this.props.userId + fourMonth + fourYear)
-
-    //call api for the data and set 
+    //call api for the data and set state
     API.getPaidBills(this.props.userId, fourMonth, fourYear)
       .then(res => this.setState({ prevFourBills: res.data }))
       .catch(err => console.log(err));
@@ -71,7 +69,6 @@ class Dashboard extends Component {
       .then(res => this.setState({ prevOneBills: res.data }))
       .catch(err => console.log(err));
   }
-
 
   handleMonthChange = event => {
     this.setState({ month: Number(event.target.value) }, this.loadBills)
@@ -104,6 +101,7 @@ class Dashboard extends Component {
   }
 
   render() {
+    //get current months bills totals
     const dueBillTotal = this.getTotal(this.state.dueBills);
     const paidBillTotal = this.getTotal(this.state.paidBills);
     const overdueBillTotal = this.getTotal(this.state.overdueBills);
@@ -114,14 +112,11 @@ class Dashboard extends Component {
     const prevTwoTotal = this.getTotal(this.state.prevTwoBills);
     const prevOneTotal = this.getTotal(this.state.prevOneBills);
 
-    //month labels 
+    //month labels for the line chart
     const fourLabel = moment().subtract(4, 'months').format("MMMM");
     const threeLabel = moment().subtract(3, 'months').format("MMMM");
     const twoLabel = moment().subtract(2, 'months').format("MMMM");
     const oneLabel = moment().subtract(1, 'months').format("MMMM");
-
-
-
 
 
     return (
