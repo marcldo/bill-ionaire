@@ -1,0 +1,16 @@
+.has-error{
+ color: red;
+}
+
+.panel{
+  margin-top: 65px;
+}
+
+.icon{
+  font-size: 15px;
+}
+
+p{
+  margin-bottom: 1px;
+  font-size: 15px;
+}

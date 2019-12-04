@@ -28,18 +28,6 @@ router.get("/:id", function (req, res) {
   });
 });
 
-// //GET route for retrieving a single recurring bill
-// router.get("/api/recurbills/:id", function(req, res) {
-//   db.RecurBill.findOne({
-//     where: {
-//       id: req.params.id
-//     }
-//   }).then(function(dbRecurBill) {
-//     console.log(dbRecurBill);
-//     res.json(dbRecurBill);
-//   });
-// });
-
 //POST route for saving a new recurring bill
 router.post("/create", function (req, res) {
   console.log("route hit");
@@ -75,7 +63,5 @@ router.put("/:id", function (req, res) {
     res.json(dbRecurBill)
   });
 });
-
-
 
 module.exports = router;
