@@ -19,7 +19,7 @@ class Bill extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-
+    this.props.billNotify()
     //if user entered amount use state else use prop
     let amount
     if (!this.state.amount) {

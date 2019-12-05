@@ -5,6 +5,8 @@ import { List, ListItem } from "../components/List";
 import Bill from "../components/Bill";
 import LineExample from "../components/Line"
 import PieExample from "../components/Pie"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "../pages_css/dashboard.css"
 const moment = require("moment");
 
@@ -32,6 +34,8 @@ class Dashboard extends Component {
   componentWillMount() {
     this.loadBills();
     this.getPreviousMonthsData();
+    console.log("ODbills", this.state.overdueBills.length)
+
   };
 
 
@@ -88,9 +92,15 @@ class Dashboard extends Component {
       .catch(err => console.log(err));
 
     API.getOverdueBills(this.props.userId)
-      .then(res => this.setState({ overdueBills: res.data }))
+      .then(res => {
+        this.setState({ overdueBills: res.data });
+        this.overDueNotify();
+      }
+      )
       .catch(err => console.log(err));
   };
+
+
 
   getTotal(arr) {
     let total = 0;
@@ -99,6 +109,42 @@ class Dashboard extends Component {
     }
     return total.toFixed(2);
   }
+
+  overDueNotify = () => {
+    if (this.state.overdueBills.length) {
+      toast.error(`You have ${this.state.overdueBills.length} bills overdue`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true
+      })
+    }
+  };
+
+  billNotify = () => {
+    toast.success(`Paid!`, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true
+    })
+  };
+
+  updateNotify = () => {
+    toast.success(`Updated!`, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true
+    })
+  };
+
 
   render() {
     //get current months bills totals
@@ -207,6 +253,7 @@ class Dashboard extends Component {
                       dueDate={dueBill.dueDate}
                       id={dueBill.id}
                       loadBills={this.loadBills}
+                      billNotify={this.billNotify}
                       btnTxt={"Pay"}
                       key={dueBill.id}
                     />
@@ -229,6 +276,7 @@ class Dashboard extends Component {
                       dueDate={paidBill.dueDate}
                       id={paidBill.id}
                       loadBills={this.loadBills}
+                      billNotify={this.updateNotify}
                       btnTxt={"Update"}
                       key={paidBill.id}
                     />
@@ -250,6 +298,7 @@ class Dashboard extends Component {
                       dueDate={overdueBill.dueDate}
                       id={overdueBill.id}
                       loadBills={this.loadBills}
+                      billNotify={this.billNotify}
                       btnTxt={"Pay"}
                       key={overdueBill.id}
                     />
@@ -261,6 +310,7 @@ class Dashboard extends Component {
           </Col>
 
         </Row>
+        <ToastContainer />
       </Container >
     )
   }
