@@ -4,6 +4,8 @@ import DeleteBtn from "../components/DeleteBtn";
 import { FormErrors } from "../components/FormErrors"
 import { Col, Row, Container, Table } from "../components/Grid";
 import { Input, FormBtn } from "../components/Form";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "../pages_css/addBill.css"
 import moment from "moment";
 
@@ -68,6 +70,18 @@ class AddBills extends Component {
       .then(res => this.loadBills())
       .catch(err => console.log(err));
   };
+  notify = () => {
+
+    toast.success('Bill Added!', {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true
+    })
+
+  };
   handleFormSubmit = e => {
     e.preventDefault();
     API.postRecurBills({
@@ -80,6 +94,7 @@ class AddBills extends Component {
     })
       .then(recurBill => {
         console.log("Bill Created", recurBill);
+        this.notify();
         this.loadBills();
         this.setState({
           name: "",
@@ -197,6 +212,8 @@ class AddBills extends Component {
                     )}</tbody>
               </Table>
             </Col>
+            <ToastContainer className='toast-container'
+              toastClassName="dark-toast" />
           </Row>
         </Container>
       </>
