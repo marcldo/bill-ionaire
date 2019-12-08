@@ -71,7 +71,6 @@ class AddBills extends Component {
       .catch(err => console.log(err));
   };
   notify = () => {
-
     toast.success('Bill Added!', {
       position: "top-right",
       autoClose: 5000,
